@@ -6,17 +6,9 @@
 	>
 
 	<!-- if button is loading -->
-	<transition 
-		enter-active-class="transition ease-out duration-200" 
-		enter-from-class="translate-y-1" 
-		enter-to-class="translate-y-0" 
-		leave-active-class="transition ease-in duration-150" 
-		leave-from-class="translate-y-0" 
-		leave-to-class="translate-y-1"
-	>	
 	<div
-	v-if="isLoading"
-	:class="['absolute top-0 left-0 w-full h-full bg-black opacity-30', rounded_class]"
+		v-if="isLoading"
+		:class="['absolute top-0 left-0 w-full h-full bg-black opacity-30', rounded_class]"
 	>
 		<span
 		class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -28,8 +20,7 @@
 			/>
 		</span>
 	</div>
-	<!-- if button is loading -->
-	</transition>
+	<!-- eof if button is loading -->
 
 	<span
 	>	
@@ -153,7 +144,8 @@ export default defineComponent({
 
 		// functions
 		function buttonClick () {
-			emit('button-click')
+			if (props.isLoading) { return false }
+			else { emit('button-click') }
 		}
 
 		return {

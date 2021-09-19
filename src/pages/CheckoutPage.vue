@@ -68,6 +68,7 @@
 	<!-- make order button -->
 	<div class="mt-8">
 		<Button
+			:isLoading="is_order_submitting"
 			@button-click="makeOrder"
 			:title="'Оформить заказ'"
 			rounded="full"
@@ -120,7 +121,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount } from 'vue';
+import { computed, defineComponent, onBeforeMount, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -151,6 +152,8 @@ export default defineComponent({
 		CreateDeliveryAddressModal,
 	},
 	setup () {
+	const is_order_submitting = ref(false)
+
 	onBeforeMount(async () => {
 		if (!delivery_methods.value || !pickup_addresses.value || !payment_methods.value) {
 			console.log('get common checkout info')
@@ -282,17 +285,25 @@ export default defineComponent({
 		// 2. Check, if user selected delivery method, delivery/pickup address, show error Toast msg if not
 		// 3. Check, if user has enough cart items, to make purchase for delivery (enough emount)
 		// 4. Submit order, if all validation passed
-		const is_created = await store.dispatch('cart/createOrderAPI')
-		if (is_created) { 
-			await store.dispatch('getUserOrdersAPI')
-			successToast("Заказ успешно создан!");
-			// load user orders
-			// route user to the profile page
-			return router.push("/profile/orders");
-		}  
-		return errorToast("Возникла ошибка во время создания заказа")
+		try {
+			is_order_submitting.value = true
+			const is_created = await store.dispatch('cart/createOrderAPI')
+			if (is_created) { 
+				await store.dispatch('getUserOrdersAPI')
+				successToast("Заказ успешно создан!");
+				// load user orders
+				// route user to the profile page
+				is_order_submitting.value = false
+				return router.push("/profile/orders");
+			}  
+			is_order_submitting.value = false
+			return errorToast("Возникла ошибка во время создания заказа")
+		} catch {
+			is_order_submitting.value = false
+		}
 	}
 		return {
+			is_order_submitting,
 			// computed
 			user_delivery_addresses,
 			user_info,

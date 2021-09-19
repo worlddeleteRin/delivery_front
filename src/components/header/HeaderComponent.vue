@@ -54,11 +54,12 @@
 		</div>
 		<div class="w-full text-center">
 		<Button
-		@click="requestCallClick"
-		class="block mx-auto mt-1 max-w-max bg-default"
-		textColor="white"
-		:title="'Заказать звонок'"
-		:size="'medium'"
+			disabled
+			@button-click="requestCallClick"
+			class="block mx-auto mt-1 max-w-max bg-default"
+			textColor="white"
+			:title="'Заказать звонок'"
+			:size="'medium'"
 		/>
 		</div>
 	</div>
@@ -71,7 +72,7 @@
 	v-if="!userAuthorized"
 	>
 		<Button
-		@click="openUserAuthorizeClicked"
+		@button-click="openUserAuthorizeClicked"
 		title="&#x1F525; Войти"
 		rounded="full"
 		size="large"
