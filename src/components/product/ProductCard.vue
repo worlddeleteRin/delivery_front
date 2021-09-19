@@ -4,6 +4,7 @@
 	but at tylewindcss "md" default screen responsive breakpoint 
 	wraps to horizontail view
 -->
+
 <div class="relative z-0 flex flex-1 md:flex-col md:items-center md:max-w-[400px] border-b border-gray-100 pt-2 pb-5
 	md:border-none py-0">
 

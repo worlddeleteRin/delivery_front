@@ -20,7 +20,7 @@
 	<router-link :to="'/'" 
 	class="flex items-center flex-shrink w-4/12 h-full md:w-3/12">
 		<img 
-		:src="logoUrl"
+		:src="static_url + 'logo_variant.png'"
 		class="object-contain w-full max-h-full h-11/12"
 		/>
 	</router-link>
@@ -214,7 +214,7 @@ export default defineComponent({
 		},
 		logoUrl: {
 			type: String,
-			default: "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.jpg",
+			default: "",
 		},
 		contactPhone: {
 			type: String,
