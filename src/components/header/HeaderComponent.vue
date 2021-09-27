@@ -87,14 +87,16 @@
 	<div
 	v-else
 	>
-		<Button
-		title="&#x1F389; Бонусы"
-		rounded="full"
-		size="large"
-		backgroundColor="#f3f3f7"
-		shadow="small"
-		class="text-[#5c6370] hover:text-gray-900"
-		/>
+		<router-link to="/profile">
+			<Button
+				title="&#x1F389; Бонусы"
+				rounded="full"
+				size="large"
+				backgroundColor="#f3f3f7"
+				shadow="small"
+				class="text-[#5c6370] hover:text-gray-900"
+			/>
+		</router-link>
 
 		<!-- user profile link button -->
 		<router-link :to="'/profile'">
