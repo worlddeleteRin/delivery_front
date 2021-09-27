@@ -20,11 +20,11 @@
 		<div class="text-sm font-semibold">
 			Адрес доставки
 		</div>		
-		<div v-if="order.delivery_method.id == 'pickup'"
+		<div v-if="order.delivery_method.id == 'pickup' && order.pickup_address"
 		class="text-sm">
 			{{ order.pickup_address.name }}
 		</div>
-		<div v-if="order.delivery_method.id == 'delivery'"
+		<div v-if="order.delivery_method.id == 'delivery' && order.delivery_address"
 		class="text-sm">
 			{{ order.delivery_address.address_display }}
 		</div>
