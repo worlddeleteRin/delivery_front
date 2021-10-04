@@ -74,7 +74,6 @@ export default defineComponent({
 	setup(props, {emit}) {
 		const input_value_local = ref(props.inputValue)
 
-		console.log('input value is', props.inputValue, input_value_local.value)
 		const is_disabled = ref(true)
 		const is_on_change = ref(false)
 		if (input_value_local.value.length == 0) {

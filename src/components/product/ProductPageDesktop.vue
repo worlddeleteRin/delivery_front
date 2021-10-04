@@ -7,16 +7,15 @@
 
 	<transition 
 		enter-active-class="transition ease-out duration-200" 
-		enter-from-class="opacity-0 translate-y-1 scale-90" 
-		enter-to-class="opacity-100 translate-y-0 scale-100" 
+		enter-from-class="opacity-0 scale-90" 
+		enter-to-class="opacity-100 scale-100" 
 		leave-active-class="transition ease-in duration-1000" 
-		leave-from-class="translate-y-0 scale-100" 
-		leave-to-class="translate-y-1 scale-0"
+		leave-from-class="scale-100" 
+		leave-to-class="scale-0"
 	>
 
 <div 
 	v-if="is_mounted"
-	id="product_id_1"
 	:class="['fixed inset-x-0 w-10/12 max-w-[800px] max-h-[500px] mx-auto bg-white rounded-xl top-1/2 transform -translate-y-1/2 flex flex-row z-50 py-4']"
 >
 	<!-- main product card div -->

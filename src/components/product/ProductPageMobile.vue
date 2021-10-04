@@ -175,7 +175,6 @@ export default defineComponent({
 		onMounted (() => {
 			is_mounted.value = true
 			const pr = document.querySelector("#product_id_1")
-			console.log('pr is', pr)
 		});
 
 		const on_mouse_down = (e, f) => {

@@ -261,7 +261,6 @@ export default defineComponent({
 						setTranslateDuration(300)
 						translateCard(0)
 						makeOverflowYScroll()
-						console.log('time start', startPanDelta.value, ', time end: ', endPanDelta.value, endPanDelta.value - startPanDelta.value, 'touch pan start px', touchPanpx.value, 'end pan px', endPanpx.value, 'can pan px compute is', canClosePxCompute.value)
 						if (needClose.value)  {
 							closeProductPage()	
 						}

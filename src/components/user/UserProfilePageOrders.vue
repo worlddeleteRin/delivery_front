@@ -42,7 +42,6 @@ export default defineComponent({
 		// functions
 		onBeforeMount(async () => {
 			if (!user_orders.value) {
-				console.log('run get user orders api')
 				await store.dispatch('getUserOrdersAPI')
 			}
 		});

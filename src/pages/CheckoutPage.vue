@@ -156,11 +156,9 @@ export default defineComponent({
 
 	onBeforeMount(async () => {
 		if (!delivery_methods.value || !pickup_addresses.value || !payment_methods.value) {
-			console.log('get common checkout info')
 			await store.dispatch("cart/getCheckoutCommonInfoAPI")
 		}
 		if (!user_delivery_addresses.value) {
-			console.log('get user delivery addresses')
 			await store.dispatch("getUserDeliveryAddressAPI")
 		}
 	});
@@ -213,7 +211,6 @@ export default defineComponent({
 		// openCheckoutModal('choose_delivery_address_modal_open',false)
 	}
 	const deleteDeliveryAddress = async (address_id: string) => { 
-		console.log('run delete')
 		const is_deleted = await store.dispatch("deleteUserDeliveryAddressAPI", address_id)
 		if (is_deleted) {
 			return null

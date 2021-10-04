@@ -63,7 +63,6 @@ export default {
 		state.pickup_addresses = pickup_addresses
 	},
 	setCheckoutModalOpen(state: Record<string,any>, {modal_name, is_open }: Record<string,any>) {
-		console.log(modal_name, is_open)
 		state.modals[modal_name] = is_open
 	},
 	setCheckoutInfoDeliveryMethod(state:Record<string,any>, delivery_method: string) {

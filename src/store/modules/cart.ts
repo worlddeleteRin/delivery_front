@@ -36,8 +36,6 @@ const actions = {
 	) {
 		const response = await CartDataService.getCheckoutCommonInfo()	
 		if (response && response.status == 200) {
-			console.log('response is', response)
-			console.log('root state is', context.rootState)
 			context.commit('checkout/setCheckoutDeliveryMethods',response.data.delivery_methods, {root: true})
 			context.commit('checkout/setCheckoutPaymentMethods', response.data.payment_methods, {root: true})
 			context.commit('checkout/setCheckoutPickupAddresses', response.data.pickup_addresses, {root: true})
@@ -49,13 +47,10 @@ const actions = {
 	async createOrderAPI(
 		context: ActionContext<any, any>,
 	) {
-		console.log('context state is', context.state)
 		const line_items = context.state.cart.line_items
 		const user_access_token = context.rootState.user.user_access_token
 		const customer_session_id = localStorage.getItem("session_id")
 		const checkout_info = context.rootState.checkout.checkout_info
-		console.log('checkout info is', checkout_info)
-		console.log('root state is', user_access_token)
 		
 		const response = await CartDataService.createOrder(
 		line_items, user_access_token, customer_session_id, checkout_info

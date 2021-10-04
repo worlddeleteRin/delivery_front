@@ -71,7 +71,7 @@ export default {
 		return false
 	},
 	sendRequestCallAPI({state}: Record<string,any>) {
-		console.log('try to send action request call API', state.request_call_info)
+		return
 		// code goes here
 	},
   },

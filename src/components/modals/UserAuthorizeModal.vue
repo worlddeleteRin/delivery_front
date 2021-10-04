@@ -236,7 +236,6 @@ export default defineComponent({
 				// need to check, if accounts exist
 				// go to register, if account exist
 				const user_exist = await store.dispatch('checkUserExistAPI')
-				console.log('user exist is', user_exist)
 				if (user_exist) {
 					user_login_info_local.user_authorize_state = props.userAuthorizeStates.NEED_PASSWORD
 				} else {

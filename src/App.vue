@@ -123,7 +123,6 @@ export default {
 			// retrierve authorize status and get user info from server
 			await store.dispatch("checkUserAuth")
 			// close user authorized model
-			console.log('after authorized value is', after_authorized_route_to.value)
 			// forward user to apropriate route
 			router.push(after_authorized_route_to.value)
 			setUserAuthorizeModal(false)

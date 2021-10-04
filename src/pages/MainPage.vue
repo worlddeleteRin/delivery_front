@@ -90,9 +90,7 @@ export default defineComponent({
 				}
 				return false
 			});
-			console.log('to return is', pr)
 			return pr
-			
 		}
 
 		const addProductToCart = async (product: Record<string,any>) => {
@@ -119,7 +117,6 @@ export default defineComponent({
 		}
 		const getProductCartItem = (product_id: string) => {
 			const cartItem = store.getters["cart/getProductCartItem"]({product_id: product_id})
-			console.log('cart item is', cartItem)
 			if (cartItem) {return cartItem}
 			return null
 		};

@@ -57,7 +57,6 @@ export default defineComponent({
 		// 
 		const product_id = route.params.id
 		const product = store.getters['catalogue/getProductById'](product_id)
-		console.log('product is', product)
 		const width = window.innerWidth
 		if (!product) {
 			router.replace("/")	

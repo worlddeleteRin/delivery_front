@@ -36,10 +36,8 @@ export default defineComponent({
 	},	
 	setup(props, {emit}) {
 		const isRouteActive = (profile_link: string) => {
-			console.log(profile_link, props.currentPath)
 			return profile_link == props.currentPath 
 		}
-		//console.log('route is', route.path)
 		
 		return {
 			isRouteActive,

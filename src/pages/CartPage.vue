@@ -94,7 +94,7 @@ export default defineComponent({
 
 		// functions
 		const submitPromo = (value: string) => {
-			console.log('call submit promo, value is', value)
+			return
 		}
 		const goCheckoutPage = () => {
 			// go to checkout page, if use is already authorized

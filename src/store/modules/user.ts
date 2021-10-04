@@ -89,7 +89,6 @@ export default {
 		}
 		const resp_data: Record<string,any> = 
 		await UserDataService.deleteUserDeliveryAddress(state.user_access_token, address_id)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			if (resp_data.data) {
 				commit('setUserDeliveryAddresses', resp_data.data)
@@ -105,7 +104,6 @@ export default {
 		}
 		const resp_data: Record<string,any> = 
 		await UserDataService.createUserDeliveryAddress(state.user_access_token, new_address)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			if (resp_data.data) {
 				commit('setUserDeliveryAddresses', resp_data.data)
@@ -132,7 +130,6 @@ export default {
 		const username = state.user_login_info.user_phone
 		const resp_data: Record<string,any> = 
 		await UserDataService.restoreUserLogin(username)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			return true
 		} else {
@@ -144,7 +141,6 @@ export default {
 		const otp_code = state.user_login_info.restore_code
 		const resp_data: Record<string,any> = 
 		await UserDataService.restoreUserLoginVerify(username, otp_code)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			const access_token = resp_data.data.access_token
 			commit('setUserAccessToken', access_token) 
@@ -156,10 +152,8 @@ export default {
 	},
 	// updates user name, request API
 	async updateUserInfoAPI({commit, state}: { commit: Commit, state: Record<string,any>}, user_info: Record<string,any>) {
-		console.log('user info to update',user_info)
 		const resp_data: Record<string,any> = 
 		await UserDataService.updateUserInfo(state.user_access_token, user_info)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			commit('setUserInfo', resp_data.data)	
 			return true
@@ -171,7 +165,6 @@ export default {
 		const new_password = state.user_login_info.user_password
 		const resp_data: Record<string,any> = 
 		await UserDataService.updatePassword(state.user_access_token, new_password)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			commit('setUserInfo', resp_data.data)	
 			return true
@@ -183,7 +176,6 @@ export default {
 		const username = state.user_login_info.user_phone 
 		const password = state.user_login_info.user_password
 		const resp_data: Record<string,any> = await UserDataService.register(username, password)
-		console.log('register response is', resp_data)
 		if (resp_data) {
 			return true
 		}
@@ -194,7 +186,6 @@ export default {
 		const password = state.user_login_info.user_password
 		const otp = state.user_login_info.verify_code
 		const resp_data: Record<string,any> = await UserDataService.registerVerify(username, password, otp)
-		console.log('register verify response is', resp_data)
 		if (resp_data) {
 			commit('setUserInfo', resp_data.data.user)
 			commit('setUserAccessToken', resp_data.data.access_token)
@@ -210,9 +201,7 @@ export default {
 		localStorage.removeItem('user_access_token')
 	},
 	async checkUserAuth({commit}: {commit: Commit}) {
-		console.log('run check user auth')
 		const access_token = localStorage.getItem("user_access_token")
-		console.log('token is', access_token)
 //		const test_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMiIsImV4cCI6MTYyOTk3NjA3Nn0.tBJxanC48a1-PbA3GfBrStrUIVFN_mkgLrmDe0vfsz4"
 //		commit('setUserAccessToken', test_token)	
 //		localStorage.setItem("user_access_token", test_token)
@@ -222,7 +211,6 @@ export default {
 		}
 		commit('setUserAccessToken', access_token)
 		const resp_data: Record<string,any> = await UserDataService.getUserMe(access_token)
-		console.log('resp data is', resp_data)
 		if (resp_data.token_valid && resp_data.user_data) {
 			commit('setUserAuthorized', true)
 			commit('setUserInfo', resp_data.user_data)
@@ -233,7 +221,6 @@ export default {
 			commit('setUserAccessToken', null)
 			localStorage.removeItem("user_access_token")
 		}
-		console.log('user is', resp_data.user_data)
 	},
 	async getAuthorizeTokenAPI({commit, state}: {commit: Commit, state: Record<string,any>},) {
 		const username = state.user_login_info.user_phone
@@ -250,17 +237,12 @@ export default {
 	async checkUserExistAPI({state}: Record<string,any>) {
 		const username = state.user_login_info.user_phone
 		const resp_data: Record<string,any> = await UserDataService.checkExistVerifiedUser(username)
-		console.log('resp data is', resp_data)
 		if (resp_data) {
 			return resp_data.data.exist_verified
 		}
 		return false
 	},
 
-	async createDeliveryAddressAPI({commit}: { commit: Commit}, new_delivery_address: Record<string,any>) {
-		console.log('commit is', commit)
-		console.log('run create new delivery address api', new_delivery_address)
-	},
 	// validators
 	validateCheckAccount({ state }: Record<string,any>) {
 		const v_info = {

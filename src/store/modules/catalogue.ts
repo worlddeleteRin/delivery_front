@@ -13,8 +13,6 @@ export default {
   },
   getters: {
 	getProductById: (state: Record<string,any>) => (product_id: string) => {
-		console.log('getter run', state, product_id)
-		console.log('state products are', state.products)
 
 		const product = state.products.find((pr: Record<string,any>) => pr.id == product_id)
 		if (!product) {
