@@ -7,6 +7,7 @@ const request_call_info_default = {
 	phone_mask: '+7',
 	session_id: null,
 	stocks: null,
+	active_category: "",
 }
 
 export default {
@@ -22,6 +23,9 @@ export default {
   mutations: {
 	setSessionId(state: Record<string,any>, session_id: string) {
 		state.session_id = session_id	
+	},
+	setActiveCategory(state: Record<string,any>, active_category: string) {
+		state.active_category = active_category
 	},
 	setStocks(state: Record<string,any>, stocks: Array<Record<string,any>>) {
 		state.stocks = stocks

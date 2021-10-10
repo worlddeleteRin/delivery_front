@@ -10,12 +10,22 @@ import 'mosha-vue-toastify/dist/style.css'
 
 import { api_url, static_url } from './settings'
 
+// import for global components
+import { Icon } from '@iconify/vue';
+
+
 const app = createApp(App)
 
 // add app global properties
 app.config.globalProperties.api_url = api_url
 app.config.globalProperties.static_url = static_url
 // eof app global properties
+// global components
+app.component('Icon', Icon)
+
+// add vue observer directive
+
+
 
 app.use(store)
 app.use(router)

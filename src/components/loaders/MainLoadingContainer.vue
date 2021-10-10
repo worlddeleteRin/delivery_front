@@ -20,12 +20,10 @@ class="flex items-center w-11/12 max-w-[500px] h-20 h-full mx-auto rounded-lg bg
 
 import { defineComponent } from 'vue';
 
-import { Icon } from '@iconify/vue';
 
 export default defineComponent({
 	name: "ModalLoadingFull",
 	components: {
-		Icon,
 	},
 	props: {
 		title: {

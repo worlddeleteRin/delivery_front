@@ -88,14 +88,12 @@
 
 <script lang="ts">
 import { onMounted, ref, reactive, defineComponent, computed } from 'vue';
-import { Icon } from '@iconify/vue';
 import Button from '@/components/buttons/Button.vue';
 
 export default defineComponent({
 	name: "CheckoutChoooseDeliveryAddressModal",
 	emits: ['close-modal', 'delivery-address', 'open-create-delivery', 'delete-delivery-address'],
 	components: {
-		Icon,
 		Button,
 	},
 	props: {

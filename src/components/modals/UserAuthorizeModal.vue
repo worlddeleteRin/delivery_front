@@ -90,18 +90,18 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref, reactive, defineComponent, computed } from 'vue';
+import { onMounted, ref, reactive, defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 // toast import
 import { createToast } from 'mosha-vue-toastify';
 
 // import user login component
-import UserLoginComponent from '@/components/login/UserLoginComponent.vue';
-import UserRegisterComponent from '@/components/login/UserRegisterComponent.vue';
-import UserLoginPasswordComponent from '@/components/login/UserLoginPasswordComponent.vue';
-import UserLoginRestoreAccountComponent from '@/components/login/UserLoginRestoreAccountComponent.vue';
-import UserLoginVerifyAccountComponent from '@/components/login/UserLoginVerifyAccountComponent.vue';
+const UserLoginComponent = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal-user-login" */ '@/components/login/UserLoginComponent.vue'));
+const UserRegisterComponent = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal-user-register" */ '@/components/login/UserRegisterComponent.vue'));
+const UserLoginPasswordComponent = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal-user-login-password" */ '@/components/login/UserLoginPasswordComponent.vue'));
+const UserLoginRestoreAccountComponent = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal-user-login-restore-account" */ '@/components/login/UserLoginRestoreAccountComponent.vue'));
+const UserLoginVerifyAccountComponent = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal-user-login-verify-account" */ '@/components/login/UserLoginVerifyAccountComponent.vue'));
 // modal loading
 import ModalLoadingFull from '@/components/loaders/ModalLoadingFull.vue';
 

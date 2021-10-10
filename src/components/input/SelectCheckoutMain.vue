@@ -63,11 +63,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, computed } from 'vue';
-import { Icon } from '@iconify/vue';
 export default defineComponent({
 	name: "SelectCheckoutMain",
 	components: {
-		Icon,
 	},
 	props: {
 		dataNew: {

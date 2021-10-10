@@ -168,7 +168,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Icon } from '@iconify/vue';
 import Button from '@/components/buttons/Button.vue';
 export default defineComponent({
 	name: "HeaderComponent",
@@ -232,7 +231,6 @@ export default defineComponent({
 		}
 	},
 	components: {
-		Icon,
 		Button,
 	},
 	emits: ["open-mobile-menu", "open-call-request", "open-user-authorize"],

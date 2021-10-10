@@ -21,12 +21,10 @@ class="absolute top-0 left-0 z-40 w-full h-full rounded-md"
 
 import { defineComponent } from 'vue';
 
-import { Icon } from '@iconify/vue';
 
 export default defineComponent({
 	name: "ModalLoadingFull",
 	components: {
-		Icon,
 	},
 	props: {
 	},

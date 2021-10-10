@@ -122,14 +122,12 @@
 
 <script lang="ts">
 import { onMounted, ref, reactive, defineComponent } from 'vue';
-//import { Icon } from '@iconify/vue';
 import Button from '@/components/buttons/Button.vue';
 
 export default defineComponent({
 	name: "CreateDeliveryAddressModal",
 	emits: ['close-modal', 'create-delivery-address'],
 	components: {
-//		Icon,
 		Button,
 	},
 	props: {

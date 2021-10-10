@@ -1,80 +1,90 @@
-<template> <div>
+<template>
+<div
+	class="mt-8 mx-auto max-w-screen-lg 2xl:max-w-screen-xl"
+>
+	<div
+			v-for="category in categories"
+			:key="category.id"
+			:id="category.slug"
+		>
+			<div 
+				class="px-4 mx-auto mt-3 mb-4 text-2xl font-semibold md:text-3xl"
+				>
+				{{ category.name }}
+			</div>
+				<div 
+					class="px-4 mx-auto grid md:grid-cols-3 lg:grid-cols-4 gap-x-7 gap-y-2 md:gap-y-12 grid-cols-1 observable border-4 border-white"
+					:data-category-slug="category.slug"
+				>
+					<product-card
+						v-for="product in getProductsByCategoryId(category.id)"
+						:product="product"
+						:key="product"
+						:cartItem="getProductCartItem(product.id)"
+						@add-item-quantity="addProductQuantity"
+						@remove-item-quantity="removeProductQuantity"
+						@add-to-cart="addProductToCart"
+						@remove-from-cart="removeProductFromCart"
+					/>
+			</div>
+		</div>
 
-	<!-- main page slider -->
-	<MainSlider 
-		class="mb-5"
-	/>
-	<!-- eof main page slider -->
 
-	<!-- 
-	<div class="text-3xl p-9">
-		cart is {{ cart }}
-	</div>
-	-->
-	active category is {{ active_category_slug }}
-	<!-- products categories -->
-	<CatalogueCategories 
-		class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl fixed top-0 w-full z-[300]"
-		:categories="categories"
-		:active-category-slug="active_category_slug"
-	/>
-	<!-- eof products categories -->
-	
-	<!-- products list -->
-	<ProductsList
-		v-if="products && categories"
-		:products="products"
-		:categories="categories"
-	/>
 
-	<MainLoadingContainer 
-		v-else
-		:title="'Загрузка товаров...'"
-	/>
-	<!-- products list -->
+	  <router-view> 
+	  </router-view>
 
 
 </div>
 </template>
 
-<script lang="ts">
 
-import { defineComponent, ref, computed, onMounted, onBeforeMount } from "vue";
+<script lang="ts">
+import { defineComponent, PropType, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 import { createToast } from 'mosha-vue-toastify';
-// local components
-import MainLoadingContainer from '@/components/loaders/MainLoadingContainer.vue';
-import MainSlider from '@/components/sliders/MainSlider.vue';
-import CatalogueCategories from '@/components/product/CatalogueCategories.vue';
 
-import ProductsList from '@/components/product/ProductsList.vue';
+import ProductCard from '@/components/product/ProductCard.vue';
 
 export default defineComponent({
-  name: "MainPage",
-  props: {
-  },
-  components: {
-  //
-	MainLoadingContainer,
-	MainSlider,
-	CatalogueCategories,
-
-	ProductsList,
-  },
-	setup () {
+	name: "ProductsList",
+	components: {
+		ProductCard,
+	},
+	props: {
+		products: {
+			type: Array as PropType<Array<Record<string,any>>>,
+			default: null,
+		},
+		categories: {
+			type: Array,
+			default: null
+		}
+	},
+	setup (props, {emit}) {
+		// const
 		const store = useStore()
-		// computed
-		const active_category_slug = computed(() => store.state.site.active_category);
-		// cart
-		const cart = computed(() => store.state.cart.cart);
-		// categories
-		const categories = computed(() => store.state.catalogue.categories);
-		// products
-		const products = computed(() => store.state.catalogue.products);
 		// functions
+		onMounted(() => {
+				const callback = (entries: any) => { 
+					const entry = entries[0]
+					if(entry.isIntersecting == true) {
+						const category_slug = entry.target.getAttribute("data-category-slug");
+						console.log(category_slug)
+						store.commit('setActiveCategory', category_slug)
+						document.querySelector("#mb-cat-nav" + category_slug)?.scrollIntoView({behavior: "smooth"})
+					}
+				}
+				const observer = new IntersectionObserver(callback, {
+					threshold: 0.1,
+				});
+				console.log('observer is', observer)
+				document.querySelectorAll(".observable").forEach((el: any) => observer.observe(el))
+		});
+
 		const getProductsByCategoryId = (category_id: string) => {
-			const pr = products.value.filter((p: Record<string,any>) => {
+			const pr = props.products.filter((p: Record<string,any>) => {
 				if (p.categories.some((c: Record<string,any>) => c.id == category_id)) {
 					return true
 				}
@@ -110,13 +120,6 @@ export default defineComponent({
 			if (cartItem) {return cartItem}
 			return null
 		};
-		onBeforeMount (() => {
-			// get categories api
-			store.dispatch("catalogue/getCategoriesAPI")
-			// get products from api
-			store.dispatch("catalogue/getProductsAPI")
-		});
-
 
 
 		// toast 
@@ -146,16 +149,8 @@ export default defineComponent({
 		var productAddedToast =  (title: string, description: string) => inputSuccessToast(title, description)
 		var productRemovedToast = (title: string, description: string) => inputSuccessToast(title, description)
 
-
-
 		return {
-			// computed
-			cart,
-			categories,
-			products,
-				// active_category 
-			active_category_slug,
-			// functions
+			// functions	
 			getProductsByCategoryId,
 
 			addProductToCart,
@@ -167,4 +162,3 @@ export default defineComponent({
 	}
 });
 </script>
-

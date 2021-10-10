@@ -170,7 +170,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
-import { Icon } from '@iconify/vue';
 
 export default defineComponent({
 	name: "MobileHeaderMenu",
@@ -197,7 +196,6 @@ export default defineComponent({
 	},
 	emits: ['close-mobile-menu', 'open-user-authorize'],
 	components: {
-		Icon,
 	},
 	setup (props, { emit }) {
 		const router = useRouter()

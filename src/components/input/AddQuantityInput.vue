@@ -26,11 +26,9 @@ items-center">
 </template>
 
 <script>
-import { Icon } from '@iconify/vue';
 export default {
 	name: "AddQuantityInput",
 	components: {
-		Icon,
 	},
 	props: {
 		quantity: {
