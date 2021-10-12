@@ -71,7 +71,6 @@ export default defineComponent({
 					const entry = entries[0]
 					if(entry.isIntersecting == true) {
 						const category_slug = entry.target.getAttribute("data-category-slug");
-						console.log(category_slug)
 						store.commit('setActiveCategory', category_slug)
 						document.querySelector("#mb-cat-nav" + category_slug)?.scrollIntoView({behavior: "smooth"})
 					}
