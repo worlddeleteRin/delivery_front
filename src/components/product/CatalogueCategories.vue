@@ -6,8 +6,8 @@
 		class="flex items-center border-2 border-black overflow-x-scroll pb-3"
 		id="mobile-category-nav"
 	>
-		<router-link
-			:to="'#' + category.slug"
+		<div
+			@click="goToCategory(category)"
 			v-for="category in categories"
 			:key="category"
 			class="flex-shrink-0"
@@ -26,7 +26,7 @@
 				{{ category.name }} 
 			</div>
 
-		</router-link>
+		</div>
 	</div>
 	<!-- eof categories -->
 
@@ -38,6 +38,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	name: "CatalogueCategories",
@@ -55,10 +56,12 @@ export default defineComponent({
 	},
 	setup () {
 		const store = useStore()
+		const router = useRouter()
 
 		const goToCategory = (category: Record<string,any>) => {
 			// set new category_slug state
 			store.commit('setActiveCategory', category.slug)
+			router.push('/#' + category.slug)
 		}
 		return {
 			// functions

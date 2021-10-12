@@ -11,16 +11,14 @@
 		cart is {{ cart }}
 	</div>
 	-->
-	<div class="fixed top-[100px] z-[300]">
 	active category is {{ active_category_slug }}
-	</div>
 
 	<!-- products categories -->
 	<el-affix
-		:offset="0"
+		:offset="10"
 	>
 		<CatalogueCategories 
-			class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl w-full z-[300] bg-white"
+			class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl fixed top-0 w-full z-[300]"
 			:categories="categories"
 			:active-category-slug="active_category_slug"
 		/>
