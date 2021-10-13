@@ -1,4 +1,6 @@
-<template> <div>
+<template> 
+
+<div>
 
 	<!-- main page slider -->
 	<MainSlider 
@@ -14,17 +16,23 @@
 	<div class="fixed top-[100px] z-[300]">
 	active category is {{ active_category_slug }}
 	</div>
+	<div>
+		some content here
+	</div>
+	<div>
+		another content here
+	</div>
 
 	<!-- products categories -->
-	<el-affix
-		:offset="0"
-	>
-		<CatalogueCategories 
-			class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl w-full z-[300] bg-white"
-			:categories="categories"
-			:active-category-slug="active_category_slug"
-		/>
-	</el-affix>
+		<el-affix>
+			<el-scrollbar ref="mobile_cat_scrollbar">
+				<CatalogueCategories 
+					class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl w-full z-[300] bg-white"
+					:categories="categories"
+					:active-category-slug="active_category_slug"
+				/>
+			</el-scrollbar>
+		</el-affix>
 	<!-- eof products categories -->
 	
 	<!-- products list -->
@@ -32,6 +40,7 @@
 		v-if="products && categories"
 		:products="products"
 		:categories="categories"
+		:mobileCatScrollbar="mobile_cat_scrollbar"
 	/>
 
 	<MainLoadingContainer 
@@ -70,6 +79,9 @@ export default defineComponent({
 	ProductsList,
   },
 	setup () {
+		// ref
+		const mobile_cat_scrollbar: any = ref(null)
+		// const
 		const store = useStore()
 		// computed
 		const active_category_slug = computed(() => store.state.site.active_category);
@@ -80,6 +92,10 @@ export default defineComponent({
 		// products
 		const products = computed(() => store.state.catalogue.products);
 		// functions
+		onMounted(() => {
+			console.log('cat scroll is', mobile_cat_scrollbar.value)
+		});
+
 		const getProductsByCategoryId = (category_id: string) => {
 			const pr = products.value.filter((p: Record<string,any>) => {
 				if (p.categories.some((c: Record<string,any>) => c.id == category_id)) {
@@ -156,6 +172,8 @@ export default defineComponent({
 
 
 		return {
+			// refs
+			mobile_cat_scrollbar,
 			// computed
 			cart,
 			categories,

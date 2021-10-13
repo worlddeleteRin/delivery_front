@@ -61,11 +61,7 @@ export default defineComponent({
 		categories: {
 			type: Array,
 			default: null
-		},
-		mobileCatScrollbar: {
-			type: Object,
-			default: null,
-		},
+		}
 	},
 	setup (props, {emit}) {
 		// const
@@ -74,20 +70,13 @@ export default defineComponent({
 		const observe_category_scroll = computed(() => store.state.site.observe_category_scroll);
 		// functions
 		onMounted(() => {
-				console.log('from pr list', props.mobileCatScrollbar)
 				const callback = (entries: any) => { 
 					const entry = entries[0]
 					if(entry.isIntersecting == true) {
 						const category_slug = entry.target.getAttribute("data-category-slug");
-						const mb_cat_cont = document.querySelector("#mobile-category-nav")
 						const el = document.querySelector("#mb-cat-nav-" + category_slug)
-						if (el && el instanceof HTMLElement && mb_cat_cont && mb_cat_cont instanceof HTMLElement && observe_category_scroll.value) {
-							console.log('cat cont is', mb_cat_cont)
+						if (el) {
 							console.log('el is', el)
-							const to_scroll = el.offsetLeft - mb_cat_cont.offsetLeft
-							props.mobileCatScrollbar.setScrollLeft(to_scroll)
-							//mb_cat_cont.scrollLeft = el.offsetLeft - mb_cat_cont.offsetLeft
-							//mb_cat_cont.scroll({left: el.offsetLeft - mb_cat_cont.offsetLeft, behavior: "smooth"})
 							//el.scrollIntoView({behavior: "smooth"})
 						}
 						store.commit('setActiveCategory', category_slug)

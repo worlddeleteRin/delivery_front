@@ -1,9 +1,8 @@
 <template>
 
-<div class="">
 	<!-- categories -->
 	<div
-		class="flex items-center border-2 border-black overflow-x-scroll pb-3"
+		class="border-2 border-black pb-3 flex"
 		id="mobile-category-nav"
 	>
 		<div
@@ -29,8 +28,6 @@
 		</div>
 	</div>
 	<!-- eof categories -->
-
-</div>
 
 </template>
 
@@ -60,12 +57,12 @@ export default defineComponent({
 
 		const goToCategory = (category: Record<string,any>) => {
 			// set new category_slug state
-			//store.commit('setObserveCategoryScroll', false)
-			//store.commit('setActiveCategory', category.slug)
-			document.querySelector("#" + category.slug)?.scrollIntoView({behavior: "smooth"})
+			// store.commit('setObserveCategoryScroll', false)
+			store.commit('setActiveCategory', category.slug)
+			// document.querySelector("#" + category.slug)?.scrollIntoView({behavior: "smooth"})
 
-			//router.push('/#' + category.slug)
-			//store.commit('setObserveCategoryScroll', true)
+			router.push('/#' + category.slug)
+			// store.commit('setObserveCategoryScroll', true)
 		}
 		return {
 			// functions
