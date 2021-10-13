@@ -2,6 +2,7 @@
 <div
 	class="mt-8 mx-auto max-w-screen-lg 2xl:max-w-screen-xl"
 >
+	observe is {{ observe_category_scroll }}
 	<div
 			v-for="category in categories"
 			:key="category.id"
@@ -40,7 +41,7 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType, onMounted } from 'vue';
+import { defineComponent, PropType, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import { createToast } from 'mosha-vue-toastify';
@@ -65,14 +66,19 @@ export default defineComponent({
 	setup (props, {emit}) {
 		// const
 		const store = useStore()
+		// computed
+		const observe_category_scroll = computed(() => store.state.site.observe_category_scroll);
 		// functions
 		onMounted(() => {
 				const callback = (entries: any) => { 
 					const entry = entries[0]
 					if(entry.isIntersecting == true) {
 						const category_slug = entry.target.getAttribute("data-category-slug");
+						const el = document.querySelector("#mb-cat-nav-" + category_slug)
+						if (el) {
+							el.scrollIntoView({behavior: "smooth", block: "nearest", inline: 'start'})
+						}
 						store.commit('setActiveCategory', category_slug)
-						document.querySelector("#mb-cat-nav" + category_slug)?.scrollIntoView({behavior: "smooth"})
 					}
 				}
 				const observer = new IntersectionObserver(callback, {
@@ -149,6 +155,8 @@ export default defineComponent({
 		var productRemovedToast = (title: string, description: string) => inputSuccessToast(title, description)
 
 		return {
+			// computed
+			observe_category_scroll,
 			// functions	
 			getProductsByCategoryId,
 

@@ -7,7 +7,6 @@ const request_call_info_default = {
 	phone_mask: '+7',
 	session_id: null,
 	stocks: null,
-	active_category: "",
 }
 
 export default {
@@ -18,7 +17,9 @@ export default {
 	request_call_info: { ...request_call_info_default },
 	loading_states: {
 		critical_data_loading: true,
-	}
+	},
+	active_category: "",
+	observe_category_scroll: true,
   },
   mutations: {
 	setSessionId(state: Record<string,any>, session_id: string) {
@@ -26,6 +27,9 @@ export default {
 	},
 	setActiveCategory(state: Record<string,any>, active_category: string) {
 		state.active_category = active_category
+	},
+	setObserveCategoryScroll(state: Record<string,any>, need_observe: boolean) {
+		state.observe_category_scroll = need_observe
 	},
 	setStocks(state: Record<string,any>, stocks: Array<Record<string,any>>) {
 		state.stocks = stocks

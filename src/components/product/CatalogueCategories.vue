@@ -11,7 +11,7 @@
 			v-for="category in categories"
 			:key="category"
 			class="flex-shrink-0"
-			:id="'mb-cat-nav' + category.slug"
+			:id="'mb-cat-nav-' + category.slug"
 		>
 			<div 
 			v-if="category.slug == activeCategorySlug"
@@ -60,8 +60,12 @@ export default defineComponent({
 
 		const goToCategory = (category: Record<string,any>) => {
 			// set new category_slug state
-			store.commit('setActiveCategory', category.slug)
-			router.push('/#' + category.slug)
+			//store.commit('setObserveCategoryScroll', false)
+			//store.commit('setActiveCategory', category.slug)
+			document.querySelector("#" + category.slug)?.scrollIntoView({behavior: "smooth"})
+
+			//router.push('/#' + category.slug)
+			//store.commit('setObserveCategoryScroll', true)
 		}
 		return {
 			// functions
