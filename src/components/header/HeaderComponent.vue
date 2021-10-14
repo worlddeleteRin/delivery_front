@@ -154,7 +154,7 @@
 			:to="'/cart'"
 			class="px-5 py-2 rounded-full cursor-pointer bg-default">
 				<span class="text-[white] select-none">
-					Корзина
+					Корзина | {{ cartQuantity }}
 				</span>
 				<span>
 				</span>
@@ -230,6 +230,10 @@ export default defineComponent({
 		userAuthorized: {
 			type: Boolean,
 			default: false,
+		},
+		cartQuantity: {
+			type: Number,
+			default: null,
 		}
 	},
 	components: {

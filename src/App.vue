@@ -10,6 +10,7 @@
 			@open-user-authorize="setUserAuthorizeModal(true)"
 			:userAuthorized="is_user_authorized"
 			:logoUrl="'http://192.168.1.141:8080/logo_variant.png'"
+			:cartQuantity="cart.line_items.length"
 			class="px-3 mt-1 md:px-2 md:mt-4"
 		/>
 	<!-- eof site main header -->
@@ -91,6 +92,7 @@ export default {
 		const store = useStore()
 		const router = useRouter()
 		// computed
+		const cart = computed(() => store.state.cart.cart);
 		// after authorized route to
 		const after_authorized_route_to = computed(() => store.state.modals.after_authorized_route_to)
 		// loading states
@@ -115,7 +117,9 @@ export default {
 			await store.dispatch("checkGetSessionId")
 			await store.dispatch("checkUserAuth")
 			// get current cart, if it is exist
-			await store.dispatch("cart/getCartAPI")
+			if (!cart.value) {
+				await store.dispatch("cart/getCartAPI")
+			}
 			store.commit('setSiteLoadingState', {
 				loading_state_name: "critical_data_loading", is_loading: false
 			});
@@ -150,6 +154,7 @@ export default {
 		}
 		return {
 			// computed
+			cart,
 			theme_colors,
 			// loading states
 			critical_data_loading,
