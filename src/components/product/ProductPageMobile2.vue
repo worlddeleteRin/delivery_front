@@ -198,7 +198,7 @@ export default defineComponent({
 				backgroud_translate_style.value = "opacity: 0; transition: opacity 200ms ease;"
 				setTranslateDuration(200)
 				translateCard(productElement.offsetHeight)
-				productElement.ontransitionend = () => router.back();
+				productElement.ontransitionend = () => router.push("/");
 
 				//is_closed.value = true
 				//router.back()

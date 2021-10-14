@@ -13,25 +13,17 @@
 		cart is {{ cart }}
 	</div>
 	-->
-	<div class="fixed top-[100px] z-[300]">
-	active category is {{ active_category_slug }}
-	</div>
-	<div>
-		some content here
-	</div>
-	<div>
-		another content here
-	</div>
+
 
 	<!-- products categories -->
-		<el-affix>
-			<el-scrollbar ref="mobile_cat_scrollbar">
+		<el-affix
+			class="md:hidden"
+		>
 				<CatalogueCategories 
 					class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl w-full z-[300] bg-white"
 					:categories="categories"
 					:active-category-slug="active_category_slug"
 				/>
-			</el-scrollbar>
 		</el-affix>
 	<!-- eof products categories -->
 	

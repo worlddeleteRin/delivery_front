@@ -2,7 +2,6 @@
 <div
 	class="mt-8 mx-auto max-w-screen-lg 2xl:max-w-screen-xl"
 >
-	observe is {{ observe_category_scroll }}
 	<div
 			v-for="category in categories"
 			:key="category.id"
@@ -71,7 +70,6 @@ export default defineComponent({
 		// const
 		const store = useStore()
 		// computed
-		const observe_category_scroll = computed(() => store.state.site.observe_category_scroll);
 		// functions
 		onMounted(() => {
 				console.log('from pr list', props.mobileCatScrollbar)
@@ -81,13 +79,13 @@ export default defineComponent({
 						const category_slug = entry.target.getAttribute("data-category-slug");
 						const mb_cat_cont = document.querySelector("#mobile-category-nav")
 						const el = document.querySelector("#mb-cat-nav-" + category_slug)
-						if (el && el instanceof HTMLElement && mb_cat_cont && mb_cat_cont instanceof HTMLElement && observe_category_scroll.value) {
+						if (el && el instanceof HTMLElement && mb_cat_cont && mb_cat_cont instanceof HTMLElement) {
 							console.log('cat cont is', mb_cat_cont)
 							console.log('el is', el)
 							const to_scroll = el.offsetLeft - mb_cat_cont.offsetLeft
-							props.mobileCatScrollbar.setScrollLeft(to_scroll)
-							//mb_cat_cont.scrollLeft = el.offsetLeft - mb_cat_cont.offsetLeft
-							//mb_cat_cont.scroll({left: el.offsetLeft - mb_cat_cont.offsetLeft, behavior: "smooth"})
+							//props.mobileCatScrollbar.setScrollLeft(to_scroll)
+							//mb_cat_cont.scrollLeft = to_scroll
+							mb_cat_cont.scroll({left: to_scroll, behavior: "smooth"})
 							//el.scrollIntoView({behavior: "smooth"})
 						}
 						store.commit('setActiveCategory', category_slug)
@@ -168,7 +166,6 @@ export default defineComponent({
 
 		return {
 			// computed
-			observe_category_scroll,
 			// functions	
 			getProductsByCategoryId,
 

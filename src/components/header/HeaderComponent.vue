@@ -135,31 +135,33 @@
 
 
 	<!-- subheader -->
-	<div class="relative hidden md:flex h-[58px] items-center justify-between">
-		<!-- desktop nav links -->				
-		<div class="flex items-center">
-			<router-link
-			:to="nav_link.link_path"
-			v-for="nav_link in menuLinks"
-			:key="nav_link"
-			class="py-4 mr-4 text-sm font-medium cursor-pointer select-none hover:text-default transition duration-200"
-			>
-				{{ nav_link.link_name }}
+	<el-affix>
+		<div class="relative hidden md:flex h-[58px] items-center justify-between bg-white">
+			<!-- desktop nav links -->				
+			<div class="flex items-center">
+				<router-link
+				:to="nav_link.link_path"
+				v-for="nav_link in menuLinks"
+				:key="nav_link"
+				class="py-4 mr-4 text-sm font-semibold cursor-pointer select-none hover:text-default transition duration-200"
+				>
+					{{ nav_link.link_name }}
+				</router-link>
+			</div>
+			<!-- eof desktop nav links -->
+			<!-- header cart -->
+			<router-link 
+			:to="'/cart'"
+			class="px-5 py-2 rounded-full cursor-pointer bg-default">
+				<span class="text-[white] select-none">
+					Корзина
+				</span>
+				<span>
+				</span>
 			</router-link>
+			<!-- eof header cart -->
 		</div>
-		<!-- eof desktop nav links -->
-		<!-- header cart -->
-		<router-link 
-		:to="'/cart'"
-		class="px-5 py-2 rounded-full cursor-pointer bg-default">
-			<span class="text-[white] select-none">
-				Корзина
-			</span>
-			<span>
-			</span>
-		</router-link>
-		<!-- eof header cart -->
-	</div>
+	</el-affix>
 	<!-- eof subheader -->
 
 

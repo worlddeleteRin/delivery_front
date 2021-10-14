@@ -161,7 +161,8 @@ export default defineComponent({
 				// remove hammer event from element
 				makeOverflowYScroll()
 				is_closed.value = true
-				router.back()
+				router.go(-1)
+				// router.back()
 			}
 		}
 

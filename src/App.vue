@@ -3,14 +3,15 @@
 
 	<div v-if="!critical_data_loading">
 	<!-- site main header -->
-	<header-component
-		@open-mobile-menu="setMobileMenu(true)"
-		@open-call-request="setCallRequestModal(true)"
-		@open-user-authorize="setUserAuthorizeModal(true)"
-		:userAuthorized="is_user_authorized"
-		:logoUrl="'http://192.168.1.141:8080/logo_variant.png'"
-		class="px-3 mt-1 md:px-2 md:mt-4"
-	/>
+
+		<header-component
+			@open-mobile-menu="setMobileMenu(true)"
+			@open-call-request="setCallRequestModal(true)"
+			@open-user-authorize="setUserAuthorizeModal(true)"
+			:userAuthorized="is_user_authorized"
+			:logoUrl="'http://192.168.1.141:8080/logo_variant.png'"
+			class="px-3 mt-1 md:px-2 md:mt-4"
+		/>
 	<!-- eof site main header -->
 
 	<!-- mobile main header -->
