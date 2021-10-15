@@ -154,7 +154,10 @@
 			:to="'/cart'"
 			class="px-5 py-2 rounded-full cursor-pointer bg-default">
 				<span class="text-[white] select-none">
-					Корзина | {{ cartQuantity }}
+					Корзина 
+					<span v-if="cartQuantity > 0">
+						| {{ cartQuantity }}
+					</span>
 				</span>
 				<span>
 				</span>

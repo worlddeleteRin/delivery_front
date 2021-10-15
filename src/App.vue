@@ -10,7 +10,7 @@
 			@open-user-authorize="setUserAuthorizeModal(true)"
 			:userAuthorized="is_user_authorized"
 			:logoUrl="'http://192.168.1.141:8080/logo_variant.png'"
-			:cartQuantity="cart.line_items.length"
+			:cartQuantity="cart == null ? 0 : cart.line_items.length"
 			class="px-3 mt-1 md:px-2 md:mt-4"
 		/>
 	<!-- eof site main header -->
