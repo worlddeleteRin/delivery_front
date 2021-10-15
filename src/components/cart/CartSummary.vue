@@ -15,10 +15,32 @@
 
 	<!-- apply promo block -->
 	<input-promo-main
+		v-if="cart.coupons.length == 0"
 		:promo-value="'somepromovaluehere'"	
 		@submit-promo="submitPromo"
 	/>
 	<!-- eof apply promo block -->
+	<!-- promo block -->
+	<div v-if="cart.coupons.length > 0">
+		<div>
+			Промокод 
+			<span>
+				{{ cart.coupons[0]?.code }}
+			</span>
+			успешно использован!
+		</div>
+		<div>
+			<el-button
+				@click="removeCartPromo"
+				:round="true"
+				size="mini"
+				type="danger"
+			>
+				Отменить промокод
+			</el-button>
+		</div>
+	</div>
+	<!-- promo block -->
 
 	<div class="py-3 my-3 border-t border-gray-300">
 		<div class="flex items-center justify-between">
@@ -83,10 +105,13 @@ export default defineComponent({
 		// functions
 		const goCheckoutClick = () => emit('go-checkout')
 		const submitPromo = (value: string) => emit('submit-promo', value)
+		const removeCartPromo = () => emit('remove-cart-promo')
 
 		return {
+			// functions
 			goCheckoutClick,
-			submitPromo
+			submitPromo,
+			removeCartPromo,
 		}
 	}
 });

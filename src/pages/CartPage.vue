@@ -7,6 +7,7 @@
 	class="text-2xl tracking-wider font-md">
 	Корзина
 </div>
+{{ cart }}
 
 <div 
 v-if="cart && cart.line_items.length != 0"
@@ -25,6 +26,7 @@ class="">
 		:cart="cart"
 		@go-checkout="goCheckoutPage"
 		@submit-promo="submitPromo"
+		@remove-cart-promo="removeCartPromo"
 		class="w-11/12 mx-auto bg-white md:ml-5 md:w-5/12"
 	/>
 </div>
@@ -93,10 +95,19 @@ export default defineComponent({
 		const cart = computed(() => store.state.cart.cart)
 
 		// functions
+			// promo
 		const submitPromo = async (promo_code: string) => {
 			const result = await store.dispatch("cart/submitPromoAPI", promo_code)
+			if (!result.success) {
+				return inputErrorToast(result.msg)
+			}
 			console.log('result is', result)
 		}
+		const removeCartPromo = async () => {
+			const result = await store.dispatch("cart/removeCartPromoAPI")
+			console.log('result is', result)
+		}
+			// checkout
 		const goCheckoutPage = () => {
 			// go to checkout page, if use is already authorized
 			if (user_authorized.value) {
@@ -162,6 +173,7 @@ export default defineComponent({
 			// functions
 			goMainPage,
 			submitPromo,
+			removeCartPromo,
 			goCheckoutPage,
 			addProductToCart,
 			removeProductFromCart,

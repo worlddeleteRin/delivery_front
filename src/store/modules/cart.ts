@@ -54,6 +54,23 @@ const actions = {
 			context.state.cart.id, 
 			promo_code, 
 		)
+		if (response && response.status == 200) {
+			context.commit("setCart", response.data)
+			return { success: true, msg: "" }
+		}
+		return { success: false, msg: "Промокод не найден" }
+	},
+	async removeCartPromoAPI(
+		context: ActionContext<any,any>
+	) {
+		const user_access_token = context.rootState.user.user_access_token
+		const response = await CartDataService.removeCartCoupon(
+			user_access_token,
+			context.state.cart.id, 
+		)
+		if (response && response.status == 200) {
+			context.commit("setCart", response.data)
+		}
 	},
 	// order section
 	async createOrderAPI(

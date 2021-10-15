@@ -8,10 +8,6 @@
 	/>
 	<!-- eof main page slider -->
 
-	<div class="text-3xl p-9">
-		cart is {{ cart }}
-	</div>
-
 
 	<!-- products categories -->
 		<el-affix

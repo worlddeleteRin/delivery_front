@@ -11,11 +11,12 @@ import 'mosha-vue-toastify/dist/style.css'
 import { api_url, static_url } from './settings'
 
 // import for global components
+import Button from '@/components/buttons/Button.vue';
 import { Icon } from '@iconify/vue';
 
 // Element Plus components
 import { 
-	ElAffix, ElScrollbar
+	ElAffix, ElScrollbar, ElButton,
 } from 'element-plus';
 import 'element-plus/dist/index.css';
 
@@ -31,10 +32,12 @@ app.config.globalProperties.static_url = static_url
 //app.use(ElementPlus)
 app.use(ElAffix)
 app.use(ElScrollbar)
+app.use(ElButton)
 //app.use(ElementPlus)
 // eof app global properties
 // global components
 app.component('Icon', Icon)
+app.component('Button', Button)
 
 // add vue observer directive
 

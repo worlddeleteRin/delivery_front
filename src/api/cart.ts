@@ -102,6 +102,19 @@ class CartDataServiceClass {
 		})
 		return response 	
 	};
+	async removeCartCoupon(user_access_token: string, cart_id: string) {
+		const response: Record<string,any> = await apiClient.post(
+		"carts/" + cart_id+'/'+'coupons/remove',
+		{
+			headers: {
+				"Authorization": `Bearer ${user_access_token}`
+			}
+		}
+		).catch(() => {
+			return response 
+		})
+		return response 	
+	};
 
 }
 
