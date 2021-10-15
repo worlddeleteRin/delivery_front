@@ -43,6 +43,18 @@ const actions = {
 		}
 		return false
 	},
+	// promo section
+	async submitPromoAPI(
+		context: ActionContext<any,any>, promo_code: string
+	) {
+		console.log('submitting promo', promo_code)
+		const user_access_token = context.rootState.user.user_access_token
+		const response = await CartDataService.applyCoupon(
+			user_access_token,
+			context.state.cart.id, 
+			promo_code, 
+		)
+	},
 	// order section
 	async createOrderAPI(
 		context: ActionContext<any, any>,

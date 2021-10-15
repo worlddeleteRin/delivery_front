@@ -85,6 +85,23 @@ class CartDataServiceClass {
 		});
 		return response 	
 	}
+	// coupons section
+	async applyCoupon(user_access_token: string, cart_id: string, coupon_code: string) {
+		const response: Record<string,any> = await apiClient.post(
+		"carts/" + cart_id+'/'+'coupons/add',
+		{
+			"coupon_code": coupon_code, 
+		},
+		{
+			headers: {
+				"Authorization": `Bearer ${user_access_token}`
+			}
+		}
+		).catch(() => {
+			return response 
+		})
+		return response 	
+	};
 
 }
 

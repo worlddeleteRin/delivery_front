@@ -93,8 +93,9 @@ export default defineComponent({
 		const cart = computed(() => store.state.cart.cart)
 
 		// functions
-		const submitPromo = (value: string) => {
-			return
+		const submitPromo = async (promo_code: string) => {
+			const result = await store.dispatch("cart/submitPromoAPI", promo_code)
+			console.log('result is', result)
 		}
 		const goCheckoutPage = () => {
 			// go to checkout page, if use is already authorized
