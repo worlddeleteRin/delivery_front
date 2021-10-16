@@ -18,7 +18,7 @@ class="relative flex items-center w-full py-2 mx-4 mb-2 bg-white border-b border
 			</div>
 		</div>
 
-		<div class="flex w-full md:ml-6 md:w-auto items-center">
+		<div class="flex w-full md:ml-6 md:w-auto">
 			<div class="flex flex-row-reverse md:flex-row items-center justify-between w-full">
 			<!-- cart item quantity -->
 				<add-quantity-input
@@ -42,17 +42,6 @@ class="relative flex items-center w-full py-2 mx-4 mb-2 bg-white border-b border
 				</div>
 				<!-- eof price block -->
 			</div>
-			<!-- delete item -->
-			<div
-				@click="removeFromCartClick"
-				class="ml-6 absolute right-2 top-2 md:top-0 md:right-0 md:relative cursor-pointer bg-red-400 md:bg-white p-2 md:p-0 rounded-full"
-			>
-				<Icon
-					icon="fa-solid:trash"
-					class="text-white md:text-black"
-				/>
-			</div>
-			<!-- eof delete item -->
 			<!--
 			<cart-product-item-delete
 				@click="removeFromCartClick"
@@ -82,6 +71,7 @@ export default defineComponent({
 	},
 	components: {
 		AddQuantityInput,
+		CartProductItemDelete,
 	},
 	emits: ['add-quantity', 'remove-quantity', 'remove-from-cart'],
 	setup (props, {emit}) {

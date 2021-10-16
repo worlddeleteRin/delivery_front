@@ -1,25 +1,55 @@
 <template>
 <div
-	class="px-2 py-3 mx-auto my-3 max-w-screen-lg 2xl:max-w-screen-xl rounded-md bg-gray-50"
+	class="px-2 py-3 mx-auto my-3 max-w-screen-md rounded-md"
 >
 
 <div
 	class="text-2xl tracking-wider font-md">
 	Корзина
 </div>
-{{ cart }}
 
 <div 
 v-if="cart && cart.line_items.length != 0"
 class="">
-<div class="flex flex-col py-3 mx-auto md:items-start md:flex-row md:px-4">
+<div class="flex flex-col py-3 mx-auto md:items-start md:px-4">
 	<cart-products
 		:lineItems="cart.line_items"
 		@add-quantity="addProductQuantity"
 		@remove-quantity="removeProductQuantity"
 		@remove-from-cart="removeProductFromCart"
-		class="flex flex-col items-center justify-center w-11/12 mx-auto md:w-7/12"
+		class="flex flex-col items-center justify-center w-full mx-auto max-w-screen-md" 
 	/>
+
+	<!-- promo block -->
+	<div>
+		<input-promo-main
+			v-if="cart.coupons.length == 0"
+			:promo-value="'somepromovaluehere'"	
+			@submit-promo="submitPromo"
+		/>
+		<!-- promo block -->
+		<div v-if="cart.coupons.length > 0">
+			<div>
+				Промокод 
+				<span class="text-default">
+					{{ cart.coupons[0]?.code }}
+				</span>
+				успешно использован!
+			</div>
+			<div>
+				<el-button
+					@click="removeCartPromo"
+					:round="true"
+					size="mini"
+					type="danger"
+				>
+					Отменить промокод
+				</el-button>
+			</div>
+		</div>
+		<!-- promo block -->
+	</div>
+	<!-- eof promo block -->
 
 
 	<cart-summary
@@ -27,7 +57,7 @@ class="">
 		@go-checkout="goCheckoutPage"
 		@submit-promo="submitPromo"
 		@remove-cart-promo="removeCartPromo"
-		class="w-11/12 mx-auto bg-white md:ml-5 md:w-5/12"
+		class="w-full mx-auto bg-white"
 	/>
 </div>
 
@@ -77,7 +107,7 @@ import { createToast } from 'mosha-vue-toastify';
 // local components
 import CartProducts from '@/components/cart/CartProducts.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
-import Button from '@/components/buttons/Button.vue';
+import InputPromoMain  from '@/components/input/InputPromoMain.vue';
 
 
 export default defineComponent({
@@ -85,7 +115,7 @@ export default defineComponent({
 	components: {
 		CartProducts,
 		CartSummary,
-		Button,
+		InputPromoMain,
 	},
 	setup () {
 		const store = useStore()

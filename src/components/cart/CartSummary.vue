@@ -1,46 +1,10 @@
 <template>
 <div class="px-4 py-5 rounded">
-	<!-- cart go checkout button -->
-	<div
-		@click="goCheckoutClick"	
-		class="flex justify-center w-full py-4 mx-auto bg-green-500 rounded cursor-pointer hover:bg-green-600 transition">
-		<span class="text-sm font-bold text-white select-none">
-			Перейти к оформлению	
-		</span>
-	</div>
-	<!-- eof cart go checkout button -->
+
 	<div class="py-2 text-xs font-medium text-gray-500">
 		Доступные способы доставки и оплаты можно выбрать при оформлении заказа
 	</div>
 
-	<!-- apply promo block -->
-	<input-promo-main
-		v-if="cart.coupons.length == 0"
-		:promo-value="'somepromovaluehere'"	
-		@submit-promo="submitPromo"
-	/>
-	<!-- eof apply promo block -->
-	<!-- promo block -->
-	<div v-if="cart.coupons.length > 0">
-		<div>
-			Промокод 
-			<span>
-				{{ cart.coupons[0]?.code }}
-			</span>
-			успешно использован!
-		</div>
-		<div>
-			<el-button
-				@click="removeCartPromo"
-				:round="true"
-				size="mini"
-				type="danger"
-			>
-				Отменить промокод
-			</el-button>
-		</div>
-	</div>
-	<!-- promo block -->
 
 	<div class="py-3 my-3 border-t border-gray-300">
 		<div class="flex items-center justify-between">
@@ -88,6 +52,15 @@
 			</span>
 		</div>
 	</div>
+	<!-- cart go checkout button -->
+	<div
+		@click="goCheckoutClick"	
+		class="flex justify-center w-full py-4 mx-auto bg-green-500 rounded cursor-pointer hover:bg-green-600 transition my-4">
+		<span class="text-sm font-bold text-white select-none">
+			Перейти к оформлению	
+		</span>
+	</div>
+	<!-- eof cart go checkout button -->
 
 </div>
 
@@ -97,7 +70,6 @@
 import { defineComponent } from 'vue';
 
 // local components 
-import InputPromoMain  from '@/components/input/InputPromoMain.vue';
 
 export default defineComponent({
 	name: "CartSummary",
@@ -108,20 +80,19 @@ export default defineComponent({
 		},
 	},
 	components: {
-		InputPromoMain,
 	},
 	emtis: ['submit-promo'],
 	setup (props, {emit}) {
 		// functions
 		const goCheckoutClick = () => emit('go-checkout')
-		const submitPromo = (value: string) => emit('submit-promo', value)
-		const removeCartPromo = () => emit('remove-cart-promo')
+		//const submitPromo = (value: string) => emit('submit-promo', value)
+		//const removeCartPromo = () => emit('remove-cart-promo')
 
 		return {
 			// functions
 			goCheckoutClick,
-			submitPromo,
-			removeCartPromo,
+		//	submitPromo,
+		//	removeCartPromo,
 		}
 	}
 });
