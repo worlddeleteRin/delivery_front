@@ -67,6 +67,16 @@
 				{{ cart.discount_amount }}  &#x20bd;	
 			</span>
 		</div>
+		<div 
+			v-if="cart.promo_discount_amount && cart.promo_discount_amount > 0"
+			class="flex items-center justify-between mt-2">
+			<span class="text-sm font-base">
+				Скидка по промокоду
+			</span>
+			<span class="text-sm font-semibold text-red-500">
+				{{ cart.promo_discount_amount }}  &#x20bd;	
+			</span>
+		</div>
 	</div>
 	<div class="pt-3 mt-3 border-t border-gray-300">
 		<div class="flex items-center justify-between">
@@ -95,7 +105,7 @@ export default defineComponent({
 		cart: {
 			type: Object,
 			default: null,
-		}
+		},
 	},
 	components: {
 		InputPromoMain,

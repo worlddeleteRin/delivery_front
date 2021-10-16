@@ -55,8 +55,11 @@ const actions = {
 			promo_code, 
 		)
 		if (response && response.status == 200) {
-			context.commit("setCart", response.data)
-			return { success: true, msg: "" }
+			console.log('response data is', response.data)
+			if (response.data.is_success && response.data.cart) {
+				context.commit("setCart", response.data.cart)
+			}
+			return { success: response.data.is_success, msg: response.data.msg }
 		}
 		return { success: false, msg: "Промокод не найден" }
 	},

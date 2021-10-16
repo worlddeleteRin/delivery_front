@@ -97,7 +97,13 @@ export default defineComponent({
 		// functions
 			// promo
 		const submitPromo = async (promo_code: string) => {
-			const result = await store.dispatch("cart/submitPromoAPI", promo_code)
+			if (!user_authorized.value) {
+				return inputErrorToast("Войдите в профиль, чтобы использовать промокод")
+			}
+			if (promo_code.trim().length == 0) {
+				return inputErrorToast("Введите промокод")
+			}
+			const result = await store.dispatch("cart/submitPromoAPI", promo_code.trim())
 			if (!result.success) {
 				return inputErrorToast(result.msg)
 			}
@@ -169,6 +175,7 @@ export default defineComponent({
 		var productRemovedToast = (title: string, description: string) => inputSuccessToast(title, description)
 
 		return {
+			// computed
 			cart,	
 			// functions
 			goMainPage,
