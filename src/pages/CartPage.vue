@@ -9,6 +9,7 @@
 </div>
 
 <div>
+	{{ cart }}
 </div>
 
 <div 

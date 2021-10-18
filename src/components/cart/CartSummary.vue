@@ -55,7 +55,7 @@
 	<!-- cart go checkout button -->
 	<div
 		@click="goCheckoutClick"	
-		class="flex justify-center w-full py-4 mx-auto bg-green-500 rounded cursor-pointer hover:bg-green-600 transition my-4">
+		class="flex justify-center w-full max-w-[500px] py-4 mx-auto bg-green-500 rounded cursor-pointer hover:bg-green-600 transition my-4">
 		<span class="text-sm font-bold text-white select-none">
 			Перейти к оформлению	
 		</span>
