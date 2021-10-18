@@ -8,6 +8,9 @@
 	Корзина
 </div>
 
+<div>
+</div>
+
 <div 
 v-if="cart && cart.line_items.length != 0"
 class="">
@@ -50,6 +53,16 @@ class="">
 		<!-- promo block -->
 	</div>
 	<!-- eof promo block -->
+
+	<!-- coupon gifts block -->
+		<coupon-gifts
+			v-if="cart.coupon_gifts && cart.coupon_gifts.length > 0"
+			:coupon-gifts="cart.coupon_gifts"
+			:coupon="cart.coupons[0]"
+			class="mt-3"
+		>
+		</coupon-gifts>
+	<!-- eof coupons gifts block -->
 
 
 	<cart-summary
@@ -98,7 +111,7 @@ class="">
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, defineAsyncComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -107,6 +120,7 @@ import { createToast } from 'mosha-vue-toastify';
 // local components
 import CartProducts from '@/components/cart/CartProducts.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
+const CouponGifts = defineAsyncComponent(() => import(/* webpackChunkName: "group-cart-page" */ '@/components/cart/CouponGifts.vue'));
 import InputPromoMain  from '@/components/input/InputPromoMain.vue';
 
 
@@ -116,6 +130,7 @@ export default defineComponent({
 		CartProducts,
 		CartSummary,
 		InputPromoMain,
+		CouponGifts,
 	},
 	setup () {
 		const store = useStore()
