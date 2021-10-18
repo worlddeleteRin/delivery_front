@@ -31,13 +31,13 @@ class="relative flex items-center w-full py-2 mx-4 mb-2 bg-white border-b border
 
 				<!-- price block -->
 				<div class="flex flex-1 text-md font-semibold md:ml-6">
-					<div v-if="lineItem.promo_price && lineItem.promo_price > 0">
-						{{ lineItem.promo_price  * lineItem.quantity }} &#8381; 
+					<div class="">
+						{{ lineItem.product.price * lineItem.quantity }} &#8381; 
 					</div>
-					<div v-else>
-						<div class="">
-							{{ lineItem.product.price * lineItem.quantity }} &#8381; 
-						</div>
+					<div v-if="lineItem.product.sale_price && lineItem.product.sale_price > 0"
+						class="text-red-500 ml-2"
+					>
+						{{ lineItem.product.sale_price * lineItem.quantity }} &#8381; 
 					</div>
 				</div>
 				<!-- eof price block -->
