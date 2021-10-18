@@ -30,7 +30,7 @@ class="relative flex items-center w-full py-2 mx-4 mb-2 bg-white border-b border
 				<!-- eof cart item quantity -->
 
 				<!-- price block -->
-				<div class="flex flex-1 text-md font-semibold md:ml-6">
+				<div class="flex flex-1 md:flex-col text-md font-semibold md:ml-2 md:min-w-[80px] items-center">
 					<div class="">
 						{{ lineItem.product.price * lineItem.quantity }} &#8381; 
 					</div>
