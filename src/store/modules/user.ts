@@ -175,11 +175,11 @@ export default {
 	async registerUserAPI({state}: {state: Record<string,any>}) {
 		const username = state.user_login_info.user_phone 
 		const password = state.user_login_info.user_password
-		const resp_data: Record<string,any> = await UserDataService.register(username, password)
-		if (resp_data) {
-			return true
-		}
-		return false
+		const resp: Record<string,any> = await UserDataService.register(username, password)
+		if (resp.status_code == 200) {
+			return { "is_registered": true, "msg": ""}
+		} 
+		return {"is_registered": false, "msg": resp?.data?.detail}
 	},
 	async registerVerifyUserAPI({commit, state}: {commit: Commit, state: Record<string,any>}) {
 		const username = state.user_login_info.user_phone 

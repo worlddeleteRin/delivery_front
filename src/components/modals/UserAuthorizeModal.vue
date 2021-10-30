@@ -212,14 +212,20 @@ export default defineComponent({
 				setLoading(false)
 				return inputErrorToast(validate_info.v_msg)
 			} else {
-				const is_registered = await store.dispatch('registerUserAPI')
-				if (is_registered) {
+				const registered_response = await store.dispatch('registerUserAPI')
+				if (registered_response?.is_registered) {
 					user_login_info_local.user_authorize_state = props.userAuthorizeStates.VERIFY_ACCOUNT
 					setLoading(false)
-					return successToast('register is valid, can go verify with sms code')
+					// return successToast('register is valid, can go verify with sms code')
 				} else {
 					setLoading(false)
-					return errorToast('Возникла ошибка, попробуйте позже')
+                    let msg = ""
+                    if (registered_response?.msg) {
+                        msg = registered_response.msg
+                    } else {
+                        msg = "Возниткла ошибка, попробуйте позже"
+                    }
+					return errorToast(msg)
 				}
 				// set modal state to VERIFY_ACCOUNT, to send and verify code
 			}
@@ -281,6 +287,7 @@ export default defineComponent({
 				// create account and login user, if code is right
 				// show errorToast, if code is not right
 				const is_verified = await store.dispatch("registerVerifyUserAPI")
+                console.log('is verified is', is_verified)
 				if (is_verified) {
 					await store.dispatch("checkUserAuth")
 					router.push(after_authorized_route_to.value)

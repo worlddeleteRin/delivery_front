@@ -42,8 +42,9 @@ class UserDataServiceClass {
 		const response: Record<string,any> = await apiClient.post("users/register", {
 			"username": username,
 			"password": password,
-		}).catch(() => {
-			return response
+		}).catch((error: Record<string,any>) => {
+            // console.log('catched error, resopnse is', response)
+			return error.response
 		});				
 		return response
 	}
