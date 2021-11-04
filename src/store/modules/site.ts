@@ -12,16 +12,24 @@ const request_call_info_default = {
 export default {
   state: {
 	common_info: {
-		location_address: "Здесь будет адрес доставки",
+		location_address: "",
+        delivery_phone: "",
+        delivery_phone_display: "",
+        main_logo_link: "",
+        menu_links: [],
 	},
 	request_call_info: { ...request_call_info_default },
 	loading_states: {
 		critical_data_loading: true,
+        common_data_loaded: false,
 	},
 	active_category: "",
 	observe_category_scroll: true,
   },
   mutations: {
+    setCommonInfo(state: Record<string,any>, common_info: Record<string,any>) {
+        common_info = { ...common_info }
+    },
 	setSessionId(state: Record<string,any>, session_id: string) {
 		state.session_id = session_id	
 	},
@@ -78,8 +86,23 @@ export default {
 		}
 		return false
 	},
-	sendRequestCallAPI({state}: Record<string,any>) {
-		return
+    async getCommonInfoAPI(
+		context: ActionContext<any,unknown>
+    ) {
+        console.log("run get common info api")
+        const response = await SiteDataService.getCommonInfo()
+        if (response && response.status == 200) {
+            context.commit('setCommonInfo', response.data)
+        }
+        context.commit('setSiteLoadingState', {
+            'loading_state_name': 'common_data_loaded',
+            'is_loading': true
+        })
+    },
+	sendRequestCallAPI(
+        context: ActionContext<any,unknown>
+    ) {
+        console.log('context is', context)
 		// code goes here
 	},
   },

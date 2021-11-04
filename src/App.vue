@@ -97,6 +97,7 @@ export default {
 		const after_authorized_route_to = computed(() => store.state.modals.after_authorized_route_to)
 		// loading states
 		const critical_data_loading = computed(() => store.state.site.loading_states.critical_data_loading);
+        const common_data_loaded = computed(() => store.state.site.loading_states.common_data_loaded);
 		// user info
 		const user = computed(() => store.state.user.user)
 		const is_user_authorized = computed(() => store.state.user.user_authorized)
@@ -120,6 +121,9 @@ export default {
 			if (!cart.value) {
 				await store.dispatch("cart/getCartAPI")
 			}
+            if (!common_data_loaded.value) {
+                await store.dispatch("getCommonInfoAPI")
+            }
 			store.commit('setSiteLoadingState', {
 				loading_state_name: "critical_data_loading", is_loading: false
 			});
