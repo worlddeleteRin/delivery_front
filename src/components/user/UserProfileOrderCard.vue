@@ -4,13 +4,13 @@
 	<!-- order id and status -->
 	<div class="flex flex-col justify-between">
 		<div class="font-bold">
-			{{ order.total_amount }} &#8381;
+			{{ order?.cart?.total_amount }} &#8381;
 		</div>
 		<div 
 		class="px-3 py-1 text-[0.7rem] md:text-[0.8rem] tracking-wide text-center text-white uppercase rounded-md"
-		:style="{backgroundColor: order.status.color }"
+		:style="{backgroundColor: order?.status?.color }"
 		>
-			{{ order.status.name }}	
+			{{ order?.status?.name }}	
 		</div>
 	</div>
 	<!-- eof order is and status -->
@@ -22,11 +22,11 @@
 		</div>		
 		<div v-if="order.delivery_method.id == 'pickup' && order.pickup_address"
 		class="text-sm">
-			{{ order.pickup_address.name }}
+			{{ order?.pickup_address?.name }}
 		</div>
 		<div v-if="order.delivery_method.id == 'delivery' && order.delivery_address"
 		class="text-sm">
-			{{ order.delivery_address.address_display }}
+			{{ order?.delivery_address?.address_display }}
 		</div>
 	</div>
 	<!-- eof order delivery info -->
@@ -36,19 +36,19 @@
 		<!-- order payment method and amount -->
 		<div class="text-sm">
 			<span>
-				{{ order.delivery_method.name }}, {{ order.payment_method.name }}	
+				{{ order?.delivery_method.name }}, {{ order?.payment_method.name }}	
 			</span>
 		</div>
 		<!-- eof order payment methods and amount -->
 		<!-- order items images -->	
 		<div class="flex mt-2 overflow-x-scroll shrink-0">
 			<div
-				v-for="order_item in order.line_items"
-				:key="order_item.id"
+				v-for="cart_item in order?.cart?.line_items"
+				:key="cart_item.id"
 				class="flex-shrink-0 w-16 h-12 px-1 fle4"
 			>
 				<img
-					:src="order_item.product.imgsrc[0]"
+					:src="cart_item?.product.imgsrc[0]"
 					class="object-contain w-full h-full"
 				/>
 			</div>
