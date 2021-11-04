@@ -28,7 +28,7 @@ export default {
   },
   mutations: {
     setCommonInfo(state: Record<string,any>, common_info: Record<string,any>) {
-        common_info = { ...common_info }
+        state.common_info = { ...common_info }
     },
 	setSessionId(state: Record<string,any>, session_id: string) {
 		state.session_id = session_id	

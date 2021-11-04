@@ -2,7 +2,6 @@
 <div class="mx-auto max-w-screen-lg 2xl:max-w-screen-xl">
 	
 	<div class="h-[50px] md:h-[76px] flex items-center justify-between relative flex-shrink">
-
 	<!-- open mobile menu button -->
 	<div 
 	@click="openMobileMenuClick"
@@ -20,7 +19,7 @@
 	<router-link :to="'/'" 
 	class="flex items-center flex-shrink w-4/12 h-full md:w-3/12">
 		<img 
-		:src="static_url + 'logo_variant.png'"
+		:src="commonInfo?.main_logo_link"
 		class="object-contain w-full max-h-full h-11/12"
 		/>
 	</router-link>
@@ -46,10 +45,10 @@
 	<div class="flex-col flex-1 hidden w-3/12 md:flex md:flex-0">
 		<div class="w-full text-center">
 			<a 
-			:href="'tel:'+ contactPhone"
+			:href="'tel:'+ commonInfo?.delivery_phone"
 			class="text-xl font-medium text-black"	
 			>
-				{{ contactPhoneDisplay }}	
+                {{ commonInfo?.delivery_phone_display }}
 			</a>
 		</div>
 		<div class="w-full text-center">
@@ -141,7 +140,7 @@
 			<div class="flex items-center">
 				<router-link
 				:to="nav_link.link_path"
-				v-for="nav_link in menuLinks"
+				v-for="nav_link in commonInfo?.menu_links"
 				:key="nav_link"
 				class="py-4 mr-4 text-sm font-semibold cursor-pointer select-none hover:text-default transition duration-200"
 				>
@@ -177,59 +176,10 @@ import Button from '@/components/buttons/Button.vue';
 export default defineComponent({
 	name: "HeaderComponent",
 	props: {
-		menuLinks: {
-			type: Array,
-			default: () => [
-					{
-						'link_name': "Меню доставки",
-						'link_path': "/",
-					},
-					{
-						'link_name': "Пицца",
-						'link_path': "/#pizza",
-					},
-					{
-						'link_name': "Роллы",
-						'link_path': "/#rolls",
-					},
-					{
-						'link_name': "Сеты",
-						'link_path': "/#sets",
-					},
-					{
-						'link_name': "Напитки",
-						'link_path': "/",
-					},
-					{
-						'link_name': "Бургеры",
-						'link_path': "/",
-					},
-					{
-						'link_name': "Акции",
-						'link_path': "/stocks",
-					},
-					{
-						'link_name': "Контакты",
-						'link_path': "/contacts",
-					},
-				],
-		},
-		brandName: {
-			type: String,
-			default: "BrandName",
-		},
-		logoUrl: {
-			type: String,
-			default: "",
-		},
-		contactPhone: {
-			type: String,
-			default: "79780000000",
-		},
-		contactPhoneDisplay: {
-			type: String,
-			default: "7 978-000-00-00",
-		},
+        commonInfo: {
+            type: Object,
+            default: null
+        },
 		userAuthorized: {
 			type: Boolean,
 			default: false,

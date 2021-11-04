@@ -8,8 +8,8 @@
 			@open-mobile-menu="setMobileMenu(true)"
 			@open-call-request="setCallRequestModal(true)"
 			@open-user-authorize="setUserAuthorizeModal(true)"
+            :common-info="common_info"
 			:userAuthorized="is_user_authorized"
-			:logoUrl="'http://192.168.1.141:8080/logo_variant.png'"
 			:cartQuantity="cart == null ? 0 : cart.line_items.length"
 			class="px-3 mt-1 md:px-2 md:mt-4"
 		/>
@@ -98,6 +98,8 @@ export default {
 		// loading states
 		const critical_data_loading = computed(() => store.state.site.loading_states.critical_data_loading);
         const common_data_loaded = computed(() => store.state.site.loading_states.common_data_loaded);
+        // common info
+        const common_info = computed(() => store.state.site.common_info);
 		// user info
 		const user = computed(() => store.state.user.user)
 		const is_user_authorized = computed(() => store.state.user.user_authorized)
@@ -169,6 +171,8 @@ export default {
 			user_authorize_open,
 			user_login_info,
 			user,
+                // common_info
+            common_info,
 
 			mobile_menu_open,
 			call_request_open,
