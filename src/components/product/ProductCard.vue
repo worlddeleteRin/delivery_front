@@ -45,13 +45,24 @@
 		<!-- addcart -->
 			<!-- mobile add cart -->
 			<div class="mt-3 md:hidden">
-				<Button
-					@button-click="addCartClick"
+                <div
 					v-if="!isInCart"
+                >
+				<Button
+                    v-if="product.sale_price && product.sale_price > 0"
+					@button-click="addCartClick"
+					:title="product.sale_price + ' &#8381;'"
+					rounded="full"
+					class="py-[0.4rem] font-medium px-8 bg-red-500 text-[14px] text-white"
+				/>
+				<Button
+                    v-else
+					@button-click="addCartClick"
 					:title="product.price + ' &#8381;'"
 					rounded="full"
 					class="py-[0.4rem] font-medium px-8 text-defaultText bg-default bg-opacity-10 text-[14px]"
 				/>
+                </div>
 
 				<add-quantity-input
 					v-if="isInCart"
@@ -64,9 +75,18 @@
 			<!-- eof mobile add cart -->
 			<!-- desktop add cart -->
 			<div class="items-center justify-between hidden mt-4 md:flex">
-				<div class="text-xl font-semibold">
-					 {{ product.price }} &#8381;
-				</div>
+                <div>
+                    <div
+                        v-if="product.sale_price && product?.sale_price > 0"
+                        class="text-xl font-bold text-red-600"
+                    >
+                        {{ product.sale_price }} &#8381;
+                    </div>
+                    <div v-else
+                    class="text-xl font-semibold">
+                         {{ product.price }} &#8381;
+                    </div>
+                </div>
 				<Button
 				@button-click="addCartClick"
 				v-if="!isInCart"

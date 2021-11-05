@@ -58,7 +58,7 @@
 				@button-click="addCartClick"
 				rounded="full"
 				:size="'large'"
-				:title="'В корзину за '+ product.price + ' &#8381;'"
+				:title="'В корзину за '+ productPrice(product) + ' &#8381;'"
 				class="block max-w-full px-5 mx-3 text-white bg-default"
 			/>
 		</div>
@@ -92,7 +92,8 @@
 
 </template>
 
-<script>
+<script lang="ts">
+
 import { defineComponent, PropType, onMounted, onUnmounted, onBeforeMount, ref, computed } from 'vue';
 import { Icon } from '@iconify/vue';
 //import ProductInterface from '@/interfaces/ProductInterface';
@@ -133,6 +134,13 @@ export default defineComponent({
 			router.push("/")
 		}
 
+        const productPrice = (product: Record<string,any>) => {
+            if (product.sale_price && product.sale_price > 0) {
+                return product.sale_price 
+            }    
+            return product.price
+        }
+
 		onMounted (() => {
 			is_mounted.value = true
 		});
@@ -146,6 +154,7 @@ export default defineComponent({
 			// functions
 			addCartClick,
 			closeProductPage,
+            productPrice
 		}
 	}
 });

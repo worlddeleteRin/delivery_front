@@ -176,7 +176,8 @@ export default {
 		const username = state.user_login_info.user_phone 
 		const password = state.user_login_info.user_password
 		const resp: Record<string,any> = await UserDataService.register(username, password)
-		if (resp.status_code == 200) {
+        console.log('response is', resp)
+		if (resp.status == 200) {
 			return { "is_registered": true, "msg": ""}
 		} 
 		return {"is_registered": false, "msg": resp?.data?.detail}

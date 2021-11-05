@@ -25,6 +25,14 @@ class SiteDataServiceClass {
 		});
 		return response 
 	}
+	async getMainSliders(): Promise<any> {
+		const response: Record<string,any> = await apiClient.get(
+		"/site/main-sliders", 
+		).catch((error) => {
+			return error.response 
+		});
+		return response 
+	}
 }
 
 export const SiteDataService = new SiteDataServiceClass()

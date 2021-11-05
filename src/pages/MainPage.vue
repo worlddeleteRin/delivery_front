@@ -4,6 +4,7 @@
 
 	<!-- main page slider -->
 	<MainSlider 
+        :sliders="main_sliders"
 		class="mb-5"
 	/>
 	<!-- eof main page slider -->
@@ -77,6 +78,8 @@ export default defineComponent({
 		const categories = computed(() => store.state.catalogue.categories);
 		// products
 		const products = computed(() => store.state.catalogue.products);
+        // main sliders
+        const main_sliders = computed(() => store.state.site.main_sliders);
 		// functions
 		onMounted(() => {
 			console.log('cat scroll is', mobile_cat_scrollbar.value)
@@ -124,6 +127,8 @@ export default defineComponent({
 			store.dispatch("catalogue/getCategoriesAPI")
 			// get products from api
 			store.dispatch("catalogue/getProductsAPI")
+            // get main sliders
+            store.dispatch("getMainSlidersAPI")
 		});
 
 
@@ -164,6 +169,7 @@ export default defineComponent({
 			cart,
 			categories,
 			products,
+            main_sliders,
 				// active_category 
 			active_category_slug,
 			// functions

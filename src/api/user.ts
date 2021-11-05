@@ -12,7 +12,7 @@ class UserDataServiceClass {
 				"Authorization": `Bearer ${user_access_token}`
 			}
 		}).catch((error) => {
-			response_info.error_msg = error.response.statusText
+			response_info.error_msg = error.response
 			return response_info
 		});
 		if (response.status == 200) {
@@ -24,8 +24,8 @@ class UserDataServiceClass {
 	async checkExistVerifiedUser(username: string): Promise<any> {
 		const response: Record<string,any> = await apiClient.post("users/exist-verified", {
 			"username": username
-		}).catch(() => {
-			return {}
+		}).catch((error) => {
+			return error.response
 		});
 		return response
 	}
@@ -42,7 +42,7 @@ class UserDataServiceClass {
 		const response: Record<string,any> = await apiClient.post("users/register", {
 			"username": username,
 			"password": password,
-		}).catch((error: Record<string,any>) => {
+		}).catch((error) => {
             // console.log('catched error, resopnse is', response)
 			return error.response
 		});				
@@ -53,8 +53,8 @@ class UserDataServiceClass {
 			"username": username,
 			"password": password,
 			"otp": otp,
-		}).catch(() => {
-			return response
+		}).catch((error) => {
+			return error.response
 		});				
 		return response
 	}
@@ -68,8 +68,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-		).catch(() => {
-			return response
+		).catch((error) => {
+			return error.response
 		});				
 		return response
 	}
@@ -83,8 +83,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-		).catch(() => {
-			return response
+		).catch((error) => {
+			return error.response
 		});				
 		return response
 	}
@@ -93,8 +93,8 @@ class UserDataServiceClass {
 			{
 				"username": username
 			},
-			).catch(() => {
-			return response
+			).catch((error) => {
+			return error.response
 	});				
 	return response
 	}
@@ -104,8 +104,8 @@ class UserDataServiceClass {
 				"username": username,
 				"otp": otp_code,
 			},
-			).catch(() => {
-			return response
+			).catch((error) => {
+			return error.response
 	});				
 	return response
 	}
@@ -116,8 +116,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-			).catch(() => {
-			return response
+			).catch((error) => {
+			return error.response
 	});				
 	return response
 	}
@@ -131,8 +131,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-			).catch(() => {
-			return response
+			).catch((error) => {
+                return error.response
 			});
 		return response
 	}
@@ -146,8 +146,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-			).catch(() => {
-				return response
+			).catch((error) => {
+				return error.response
 			});
 		return response
 	}
@@ -159,8 +159,8 @@ class UserDataServiceClass {
 					"Authorization": `Bearer ${user_access_token}`
 				}
 			}
-			).catch(() => {
-				return response
+			).catch((error) => {
+				return error.response
 			});
 		return response
 	}

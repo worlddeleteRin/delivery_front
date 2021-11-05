@@ -18,15 +18,20 @@ export default {
         main_logo_link: "",
         menu_links: [],
 	},
+    main_sliders: [],
 	request_call_info: { ...request_call_info_default },
 	loading_states: {
 		critical_data_loading: true,
         common_data_loaded: false,
+        main_sliders_loaded: false,
 	},
 	active_category: "",
 	observe_category_scroll: true,
   },
   mutations: {
+   setMainSliders(state: Record<string,any>, main_sliders: Record<string,any>) {
+        state.main_sliders = main_sliders
+    },
     setCommonInfo(state: Record<string,any>, common_info: Record<string,any>) {
         state.common_info = { ...common_info }
     },
@@ -89,13 +94,27 @@ export default {
     async getCommonInfoAPI(
 		context: ActionContext<any,unknown>
     ) {
-        console.log("run get common info api")
         const response = await SiteDataService.getCommonInfo()
         if (response && response.status == 200) {
             context.commit('setCommonInfo', response.data)
         }
         context.commit('setSiteLoadingState', {
             'loading_state_name': 'common_data_loaded',
+            'is_loading': true
+        })
+    },
+    async getMainSlidersAPI(
+		context: ActionContext<any,unknown>
+    ) {
+        if (context.state.loading_states.main_slider_loaded) {
+            return
+        }
+        const response = await SiteDataService.getMainSliders()
+        if (response && response.status == 200) {
+            context.commit('setMainSliders', response.data)
+        }
+        context.commit('setSiteLoadingState', {
+            'main_sliders_loaded': 'common_data_loaded',
             'is_loading': true
         })
     },
