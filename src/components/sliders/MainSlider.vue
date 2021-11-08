@@ -19,7 +19,7 @@
   </splide>
 
 </template>
-<script lang="ts">
+<script>
 
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
@@ -42,7 +42,7 @@ export default defineComponent({
     setup () {
         const router = useRouter()
         // functions
-        const goSliderLink = (slider_item: Record<string,any>) => {
+        const goSliderLink = (slider_item) => {
             if (slider_item.link_path && slider_item.link_path.trim().length > 0) {
                 window.location.href = slider_item.link_path
             }
