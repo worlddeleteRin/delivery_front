@@ -13,7 +13,7 @@
 	@click="goToProductPage"
 	class="w-6/12 md:max-w-[250px] h-full max-h-[230px] relative rounded md:w-full">
 		<img
-			v-lazy="'https://dodopizza-a.akamaihd.net/static/Img/Products/5dffe4c7d3bc49668f50c1d08d920992_292x292.jpeg'"
+			v-lazy="product?.imgsrc[0]"
 			class="object-contain w-full h-full rounded cursor-pointer"
 		/>
 	</div>

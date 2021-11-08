@@ -13,6 +13,7 @@
 	<!-- products categories -->
 		<el-affix
 			class="md:hidden"
+            z-index="10"
 		>
 				<CatalogueCategories 
 					class="max-w-screen-lg mx-auto 2xl:max-w-screen-xl w-full z-[300] bg-white"

@@ -1,7 +1,7 @@
 <template>
 <div 
 	@click="closeProductPage"
-	class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40"
+	class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-20"
 	>
 </div>
 
@@ -23,7 +23,7 @@
 	<!-- image -->
 	<div class="max-h-[400px] h-full relative rounded w-7/12 flex">
 		<img
-			v-lazy="'https://dodopizza-a.akamaihd.net/static/Img/Products/ebb801139e7d4c4397fcc4372c7dd149_1875x1875.jpeg'"
+			v-lazy="product?.imgsrc[0]"
 			class="object-contain w-full rounded"
 		/>
 	</div>

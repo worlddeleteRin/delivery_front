@@ -24,7 +24,7 @@
 	<!-- image -->
 	<div class="max-h-[400px] h-full relative rounded w-full flex">
 		<img
-			v-lazy="'https://dodopizza-a.akamaihd.net/static/Img/Products/ebb801139e7d4c4397fcc4372c7dd149_1875x1875.jpeg'"
+			v-lazy="product?.imgsrc[0]"
 			class="object-contain w-full rounded"
 		/>
 	</div>

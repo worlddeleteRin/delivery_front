@@ -134,7 +134,9 @@
 
 
 	<!-- subheader -->
-	<el-affix>
+	<el-affix
+        z-index="10"
+    >
 		<div class="relative hidden md:flex h-[58px] items-center justify-between bg-white">
 			<!-- desktop nav links -->				
 			<div class="flex items-center">
