@@ -41,6 +41,16 @@
 				{{ cart.promo_discount_amount }}  &#x20bd;	
 			</span>
 		</div>
+		<div 
+			v-if="cart.bonuses_to_apply && cart?.bonuses_to_apply > 0"
+			class="flex items-center justify-between mt-2">
+			<span class="text-sm font-base">
+			    Бонусов будет начислено	
+			</span>
+			<span class="text-sm font-semibold text-red-500">
+				{{ cart.bonuses_to_apply }}
+			</span>
+		</div>
 	</div>
 	<div class="pt-3 mt-3 border-t border-gray-300">
 		<div class="flex items-center justify-between">

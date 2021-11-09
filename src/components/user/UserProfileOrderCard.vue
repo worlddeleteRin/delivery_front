@@ -1,6 +1,10 @@
 <template> 
-<div v-if="order">
-	<div class="flex justify-between px-4 py-3 bg-gray-50 rounded-md">
+<div v-if="order"
+    class="px-4 py-3 bg-gray-50 rounded-md"
+>
+	<div 
+        class="flex justify-between"
+    >
 	<!-- order id and status -->
 	<div class="flex flex-col justify-between">
 		<div class="font-bold">
@@ -56,8 +60,20 @@
 		<!-- eof order items images -->
 	</div>
 	<!-- eof order main info -->
-
 	</div>
+    <!-- order bonuses -->
+    <div 
+        v-if="order?.cart?.bonuses_to_apply && order?.cart?.bonuses_to_apply > 0"
+        class="mt-2 bg-green-400 max-w-max rounded-md px-2"
+    >
+        <span 
+        class="uppercase text-[13px] text-white"
+        >
+            Бонусов с заказа:
+            {{ order?.cart?.bonuses_to_apply }}
+        </span>
+    </div>
+    <!-- eof order bonuses -->
 </div>
 </template>
 
