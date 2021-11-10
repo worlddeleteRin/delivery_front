@@ -13,6 +13,8 @@ module.exports = {
 		...colors,
 		default: "#ff6900",
 		defaultDim: "#fff0e6",
+        greenDim: "#e6ffe9",
+        greenText: "#03b800",
 		defaultTextBg: "#d15700",
 		defaultText: "#ff6900",
 		defaultGray: "#f3f3f7",
