@@ -106,53 +106,68 @@ const actions = {
 		} else {return false}
 	},
 	async createCartAPI(
-		{commit}: {commit: Commit},	
+        context: ActionContext<any,any>,
 		{line_item}: {line_item: Record<string,any>},
 	) {
+		const user_access_token = context.rootState.user.user_access_token
 		const session_id = localStorage.getItem('session_id')
-		const response = await CartDataService.createCart([line_item], session_id)		
+		const response = await CartDataService.createCart(
+            [line_item], session_id,
+            user_access_token
+        )		
 		if (response && response.status == 200) {
-			commit("setCart", response.data)
+			context.commit("setCart", response.data)
 			return true
 		} else {return false}
 	},
 	async addLineItemAPI(
-		{state, dispatch, commit}: {state: Record<string, any>, dispatch: Dispatch, commit: Commit},
+        context: ActionContext<any,any>,
 		{product}: {product: Record<string,any>}
 	) {
+		const user_access_token = context.rootState.user.user_access_token
 		const line_item = {
 			"product_id": product.id,
 			"quantity": 1
 		}
-		if (!state.cart) {
-			const is_created = await dispatch("createCartAPI", {line_item: line_item})
+		if (!context.state.cart) {
+			const is_created = await context.dispatch("createCartAPI", {line_item: line_item})
 			if (is_created) { return true}
 			return false
 		}
-		const response = await CartDataService.addCartItems(state.cart.id, [line_item])
+		const response = await CartDataService.addCartItems(
+            context.state.cart.id, 
+            [line_item],
+            user_access_token
+        )
 		if (response && response.status == 200) {
-			commit("setCart", response.data)
+			context.commit("setCart", response.data)
 			return true
 		} else {return false}
 	},
 	async addLineItemQuantityAPI(
-		context: ActionContext<any,unknown>,
+		context: ActionContext<any,any>,
 		{line_item}: {line_item: Record<string,any>}
 	) {
 		if (!state.cart) {
 			return false
 		}
 		if (!line_item) {return false}
+		const user_access_token = context.rootState.user.user_access_token
 		const new_line_item = {...line_item }
 		new_line_item.quantity += 1
-		const response = await CartDataService.updateCartItem(context.state.cart.id, line_item.id, new_line_item)
+		const response = await CartDataService.updateCartItem(
+            context.state.cart.id, 
+            line_item.id, 
+            new_line_item,
+            user_access_token,
+        )
 		if (response && response.status == 200) {
 			context.commit("setCart", response.data)
 			return true
 		} else {return false}
 	},
 	async removeLineItemQuantityAPI(
-		context: ActionContext<any,unknown>,
+		context: ActionContext<any,any>,
 		{line_item}: {line_item: Record<string,any>}
 	) {
 		if (!state.cart) {
@@ -161,14 +176,21 @@ const actions = {
 		if (!line_item) {return false}
 		const new_line_item = {...line_item }
 		new_line_item.quantity -= 1
-		const response = await CartDataService.updateCartItem(context.state.cart.id, line_item.id, new_line_item)
+		const user_access_token = context.rootState.user.user_access_token
+
+		const response = await CartDataService.updateCartItem(
+            context.state.cart.id, 
+            line_item.id, 
+            new_line_item,
+            user_access_token,
+        )
 		if (response && response.status == 200) {
 			context.commit("setCart", response.data)
 			return true
 		} else {return false}
 	},
 	async removeLineItemAPI(
-		context: ActionContext<any,unknown>,
+		context: ActionContext<any,any>,
 		{line_item}: {line_item: Record<string,any>}
 	) {
 		if (!state.cart) {
@@ -177,7 +199,14 @@ const actions = {
 		// get line_item with specified to delete product id
 		//const line_item = context.getters.getProductCartItem({product_id: product_id})
 		if (!line_item) {return false}
-		const response = await CartDataService.removeCartItem(context.state.cart.id, line_item.id)
+
+		const user_access_token = context.rootState.user.user_access_token
+
+		const response = await CartDataService.removeCartItem(
+            context.state.cart.id, 
+            line_item.id,
+            user_access_token,
+        )
 		if (response && response.status == 200) {
 			context.commit("setCart", response.data)
 			return true

@@ -9,43 +9,80 @@ class CartDataServiceClass {
 		});
 		return response 
 	}
-	async createCart(cart_items: Array<Record<string,any>>, session_id: string | null): Promise<any> {
+	async createCart(
+        cart_items: Array<Record<string,any>>, 
+        session_id: string | null, 
+        user_access_token?: string | null,
+        ): Promise<any> {
 		const response: Record<string,any> = await apiClient.post(
 		"carts/" + session_id, 
 		{
 			"line_items": cart_items
 		},
+        {
+            headers: {
+                "Authorization": user_access_token == null ? null: `Bearer ${user_access_token}`,
+            }
+        }
 		).catch(() => {
 			return response 
 		});
 		return response 
 	}
-	async addCartItems(cart_id: string, cart_items: Array<Record<string,any>>): Promise<any> {
+	async addCartItems(
+        cart_id: string, 
+        cart_items: Array<Record<string,any>>,
+        user_access_token?: string | null,
+        ): Promise<any> {
 		const response: Record<string,any> = await apiClient.post(
 		"carts/" + cart_id + "/items",
 	//	`"carts/${cart_id}/items"`, 
 		{
 			"line_items": cart_items
 		},
+        {
+            headers: {
+                "Authorization": user_access_token == null ? null: `Bearer ${user_access_token}`,
+            }
+        }
 		).catch(() => {
 			return response 
 		});
 		return response 	
 	}
-	async removeCartItem(cart_id: string, item_id: string): Promise<any> {
+	async removeCartItem(
+        cart_id: string, 
+        item_id: string,
+        user_access_token?: string | null,
+        ): Promise<any> {
 		const response: Record<string,any> = await apiClient.delete(
 		"carts/" + cart_id + "/items/" + item_id, 
+        {
+           headers: {
+                "Authorization": user_access_token == null ? null: `Bearer ${user_access_token}`,
+            }
+        }
 		).catch(() => {
 			return response 
 		});
 		return response 	
 	}
-	async updateCartItem(cart_id: string, item_id: string, new_item: Record<string,any>): Promise<any> {
+	async updateCartItem(
+        cart_id: string, 
+        item_id: string, 
+        new_item: Record<string,any>,
+        user_access_token?: string | null,
+        ): Promise<any> {
 		const response: Record<string,any> = await apiClient.patch(
 		"carts/" + cart_id + "/items/" + item_id, 
 		{
 			"line_item": new_item
-		}
+		},
+        {
+           headers: {
+                "Authorization": user_access_token == null ? null: `Bearer ${user_access_token}`,
+            }
+        }
 		).catch(() => {
 			return response 
 		});
