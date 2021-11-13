@@ -5,8 +5,6 @@ const request_call_info_default = {
 	name: '',
 	phone: '',
 	phone_mask: '+7',
-	session_id: null,
-	stocks: null,
 }
 
 export default {
@@ -17,6 +15,7 @@ export default {
         delivery_phone_display: "",
         main_logo_link: "",
         menu_links: [],
+        map_delivery_location_link: "",
 	},
     main_sliders: [],
 	request_call_info: { ...request_call_info_default },
@@ -118,11 +117,15 @@ export default {
             'is_loading': true
         })
     },
-	sendRequestCallAPI(
+	async sendRequestCallAPI(
         context: ActionContext<any,unknown>
     ) {
-        console.log('context is', context)
-		// code goes here
+        const request_call_info = context.state.request_call_info
+        const response = await SiteDataService.requestCallAPI(request_call_info)
+        if (response && response.status == 200) {
+            return true
+        }
+        return false
 	},
   },
 }

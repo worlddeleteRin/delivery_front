@@ -68,16 +68,18 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { computed, defineAsyncComponent, onBeforeMount } from 'vue'
 
+import { createToast } from 'mosha-vue-toastify';
+
 // local components
-import HeaderComponent from '@/components/header/HeaderComponent';
-const MobileHeaderMenu  = defineAsyncComponent (() => import(/* webpackChunkName: "mobile-header" */'@/components/header/MobileHeaderMenu'));
-const RequestCallModal = defineAsyncComponent ( () => import(/* webpackChunkName: "request-call-modal" */'@/components/modals/RequestCallModal'));
-const UserAuthorizeModal = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal" */ '@/components/modals/UserAuthorizeModal'));
+import HeaderComponent from '@/components/header/HeaderComponent.vue';
+const MobileHeaderMenu  = defineAsyncComponent (() => import(/* webpackChunkName: "mobile-header" */'@/components/header/MobileHeaderMenu.vue'));
+const RequestCallModal = defineAsyncComponent ( () => import(/* webpackChunkName: "request-call-modal" */'@/components/modals/RequestCallModal.vue'));
+const UserAuthorizeModal = defineAsyncComponent( () => import(/* webpackChunkName: "authorize-modal" */ '@/components/modals/UserAuthorizeModal.vue'));
 //import MobileHeaderMenu from '@/components/header/MobileHeaderMenu';
 
 export default {
@@ -138,26 +140,52 @@ export default {
 			router.push(after_authorized_route_to.value)
 			setUserAuthorizeModal(false)
 		}
-		var setMobileMenu = (is_open) => store.commit("modals/setMobileMenuOpen", is_open)	
-		var setCallRequestModal = (is_open) => {
+		var setMobileMenu = (is_open: boolean) => store.commit("modals/setMobileMenuOpen", is_open)	
+		var setCallRequestModal = (is_open: boolean) => {
 			if (!is_open) {
 				store.commit('resetRequestCallInfo')
 			}
 			store.commit("modals/setCallRequestModalOpen", is_open)
 		}
-		var setUserAuthorizeModal = (is_open) => store.commit("modals/setUserAuthorizeOpen", 
+		var setUserAuthorizeModal = (is_open: boolean) => store.commit("modals/setUserAuthorizeOpen", 
 		{is_open: is_open, after_authorized_route_to: "/profile"})
-		var setUserLoginInfo = (new_user_login_info) => { 
+		var setUserLoginInfo = (new_user_login_info: Record<string,any>) => { 
 			store.commit("setUserLoginInfo", new_user_login_info)
 		}
 		// update request call info
-		var updateRequestCallInfo = (new_call_info) => {
+		var updateRequestCallInfo = (new_call_info: Record<string,any>) => {
 			store.commit("setRequestCallInfo", new_call_info)
 		}
 		// send request call
 		var sendRequestCall = async () => {
-			await store.dispatch('sendRequestCallAPI')	
+			const is_success = await store.dispatch('sendRequestCallAPI')	
+            setCallRequestModal(false)
+            if (is_success) {
+                return successToast("Заявка на обратный звонок успешно отправлена!") 
+            } else {
+                return errorToast("Возникла ошибка при отправке заявки!") 
+            }
 		}
+
+		const errorToast = (title: string) => {
+			createToast(
+				title, {
+					'type': 'danger',
+					'showIcon': true,
+					'hideProgressBar': true,	
+				}
+			);
+		};
+		const successToast = (title: string) => {
+			createToast(
+				title, {
+					'type': 'success',
+					'showIcon': true,
+					'hideProgressBar': true,
+				}
+			);
+		};
+
 		return {
 			// computed
 			cart,

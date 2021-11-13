@@ -10,4 +10,7 @@ html {
 	scroll-behavior: smooth !important;
 }
 
+.mosha__toast {
+    margin-top: 10% !important;
+}
 

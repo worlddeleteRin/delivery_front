@@ -153,7 +153,6 @@ export default defineComponent({
 			} else {
 				// can emit request call and send call request
 				emit('request-call')
-				return successToast('request-call emited')
 			}
 		}
 		var updateRequestCallInfoClick = () => emit('request-call-info', request_call_info_local)

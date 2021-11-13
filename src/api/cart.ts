@@ -152,6 +152,43 @@ class CartDataServiceClass {
 		})
 		return response 	
 	};
+    // pay with bonuses
+    async addPayWithBonusesAPI(
+        user_access_token: string, 
+        cart_id: string, 
+        pay_with_bonuses: number,
+    ) {
+        const response: Record<string,any> = await apiClient.post(
+        "carts/" + cart_id+'/'+'pay-bonuses',
+        {
+            "pay_with_bonuses": pay_with_bonuses, 
+        },
+        {
+            headers: {
+                "Authorization": `Bearer ${user_access_token}`
+            }
+        }
+        ).catch((error) => {
+            return error.response 
+        })
+        return response 	
+    };
+    async removePayWithBonusesAPI(
+        user_access_token: string, 
+        cart_id: string, 
+    ) {
+        const response: Record<string,any> = await apiClient.delete(
+        "carts/" + cart_id+'/'+'pay-bonuses',
+        {
+            headers: {
+                "Authorization": `Bearer ${user_access_token}`
+            }
+        }
+        ).catch((error) => {
+            return error.response 
+        })
+        return response 	
+    };
 
 }
 

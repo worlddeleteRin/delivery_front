@@ -16,7 +16,7 @@ import { Icon } from '@iconify/vue';
 
 // Element Plus components
 import { 
-	ElAffix, ElScrollbar, ElButton,
+	ElAffix, ElScrollbar, ElButton, ElSlider
 } from 'element-plus';
 import 'element-plus/dist/index.css';
 
@@ -33,6 +33,7 @@ app.config.globalProperties.static_url = static_url
 app.use(ElAffix)
 app.use(ElScrollbar)
 app.use(ElButton)
+app.use(ElSlider)
 //app.use(ElementPlus)
 // eof app global properties
 // global components

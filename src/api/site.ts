@@ -33,6 +33,18 @@ class SiteDataServiceClass {
 		});
 		return response 
 	}
+	async requestCallAPI(
+        request_call_info: Record<string,any>
+    ): Promise<any> {
+		const response: Record<string,any> = await apiClient.post(
+		"/site/request-call", 
+        {...request_call_info}
+		).catch((error) => {
+			return error.response 
+		});
+		return response 
+	}
+
 }
 
 export const SiteDataService = new SiteDataServiceClass()

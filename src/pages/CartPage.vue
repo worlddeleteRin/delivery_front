@@ -8,10 +8,6 @@
 	Корзина
 </div>
 
-<div>
-	{{ cart }}
-</div>
-
 <div 
 v-if="cart && cart.line_items.length != 0"
 class="">
@@ -54,6 +50,13 @@ class="">
 		<!-- promo block -->
 	</div>
 	<!-- eof promo block -->
+
+
+    <!-- pay with bonuses component -->
+    <pay-with-bonuses
+        class="mt-3 px-5 bg-greenDim rounded-lg"
+    />
+    <!-- eof pay with bonuses component -->
 
 	<!-- coupon gifts block -->
 		<coupon-gifts
@@ -123,6 +126,7 @@ import CartProducts from '@/components/cart/CartProducts.vue';
 import CartSummary from '@/components/cart/CartSummary.vue';
 const CouponGifts = defineAsyncComponent(() => import(/* webpackChunkName: "group-cart-page" */ '@/components/cart/CouponGifts.vue'));
 import InputPromoMain  from '@/components/input/InputPromoMain.vue';
+import PayWithBonuses from '@/components/cart/PayWithBonuses.vue';
 
 
 export default defineComponent({
@@ -132,6 +136,7 @@ export default defineComponent({
 		CartSummary,
 		InputPromoMain,
 		CouponGifts,
+        PayWithBonuses,
 	},
 	setup () {
 		const store = useStore()

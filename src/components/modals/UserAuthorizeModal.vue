@@ -90,6 +90,7 @@
 </template>
 
 <script lang="ts">
+
 import { onMounted, ref, reactive, defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -250,7 +251,6 @@ export default defineComponent({
 				// go to type password, if accounts not exist
 				updateUserLoginInfo()
 				setLoading(false)
-				return successToast('login is valid, can go further')
 			}
 		}
 		var loginCheckPassword = async () => {
