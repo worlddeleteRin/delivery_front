@@ -153,7 +153,7 @@ class CartDataServiceClass {
 		return response 	
 	};
     // pay with bonuses
-    async addPayWithBonusesAPI(
+    async addPayWithBonuses(
         user_access_token: string, 
         cart_id: string, 
         pay_with_bonuses: number,
@@ -173,7 +173,7 @@ class CartDataServiceClass {
         })
         return response 	
     };
-    async removePayWithBonusesAPI(
+    async removePayWithBonuses(
         user_access_token: string, 
         cart_id: string, 
     ) {

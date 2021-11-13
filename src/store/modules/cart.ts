@@ -212,6 +212,26 @@ const actions = {
 			return true
 		} else {return false}
 	},
+    // pay with bonuses
+    async addPayWithBonusesAPI(
+		context: ActionContext<any,any>,
+        pay_with_bonuses: number,
+	) {
+		if (!state.cart) {return false}
+		const user_access_token = context.rootState.user.user_access_token
+
+		const response = await CartDataService.addPayWithBonuses(
+            user_access_token,
+            context.state.cart.id, 
+            pay_with_bonuses,
+        )
+		if (response && response.status == 200) {
+			context.commit("setCart", response.data)
+			return {"is_success": true, "msg": ""}
+		} else {
+			return {"is_success": false, "msg": response.data.detail}
+        }
+	},
 }
 
 const cart_store = {

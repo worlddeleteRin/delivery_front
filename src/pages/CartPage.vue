@@ -8,10 +8,14 @@
 	Корзина
 </div>
 
+<div>
+    {{ cart }}
+</div>
+
 <div 
 v-if="cart && cart.line_items.length != 0"
 class="">
-<div class="flex flex-col py-3 mx-auto md:items-start md:px-4">
+<div class="py-3 mx-auto md:items-start md:px-4">
 	<cart-products
 		:lineItems="cart.line_items"
 		@add-quantity="addProductQuantity"
@@ -53,9 +57,15 @@ class="">
 
 
     <!-- pay with bonuses component -->
-    <pay-with-bonuses
-        class="mt-3 px-5 bg-greenDim rounded-lg"
-    />
+    <div class="block">
+        <pay-with-bonuses
+            v-if="user_authorized && user.bonuses > 0"
+            :user-bonuses="user.bonuses"
+            :is-loading="pay_bonuses_loading"
+            @pay-bonuses="addPayBonuses"
+            class="mt-3 px-5 rounded-lg"
+        />
+    </div>
     <!-- eof pay with bonuses component -->
 
 	<!-- coupon gifts block -->
@@ -115,7 +125,7 @@ class="">
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineAsyncComponent } from 'vue';
+import { computed, defineComponent, defineAsyncComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -143,8 +153,12 @@ export default defineComponent({
 		const router = useRouter()
 		// computed
 		const user_authorized = computed(() => store.state.user.user_authorized)
+        const user = computed(() => store.state.user.user)
 		const cart = computed(() => store.state.cart.cart)
+        
 
+        // local loaders
+        const pay_bonuses_loading = ref(false);
 		// functions
 			// promo
 		const submitPromo = async (promo_code: string) => {
@@ -198,6 +212,15 @@ export default defineComponent({
 			return errorToast("Ошибка в процессе добавления товара");
 		}
 
+        const addPayBonuses = async(pay_with_bonuses: number) => {
+            pay_bonuses_loading.value = true
+            const result = await store.dispatch("cart/addPayWithBonusesAPI", pay_with_bonuses)
+            pay_bonuses_loading.value = false
+            if (!result?.is_success) {
+                return errorToast(result?.msg)
+            }
+        }
+
 		// toast 
 		const inputErrorToast = (title: string) => {
 			createToast(
@@ -228,6 +251,10 @@ export default defineComponent({
 		return {
 			// computed
 			cart,	
+            user_authorized,
+            user,
+                // local loaders
+            pay_bonuses_loading,
 			// functions
 			goMainPage,
 			submitPromo,
@@ -237,6 +264,7 @@ export default defineComponent({
 			removeProductFromCart,
 			addProductQuantity,
 			removeProductQuantity,
+            addPayBonuses,
 		}
 	}
 });
