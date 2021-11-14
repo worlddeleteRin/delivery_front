@@ -8,9 +8,6 @@
 	Корзина
 </div>
 
-<div>
-    {{ cart }}
-</div>
 
 <div 
 v-if="cart && cart.line_items.length != 0"
@@ -60,9 +57,12 @@ class="">
     <div class="block">
         <pay-with-bonuses
             v-if="user_authorized && user.bonuses > 0"
-            :user-bonuses="user.bonuses"
+            :user-bonuses="user?.bonuses"
+            :bonuses-used="cart?.bonuses_used"
+            :pay-with-bonuses="cart?.pay_with_bonuses"
             :is-loading="pay_bonuses_loading"
             @pay-bonuses="addPayBonuses"
+            @remove-pay-bonuses="removePayBonuses"
             class="mt-3 px-5 rounded-lg"
         />
     </div>
@@ -220,6 +220,14 @@ export default defineComponent({
                 return errorToast(result?.msg)
             }
         }
+        const removePayBonuses = async() => {
+            pay_bonuses_loading.value = true
+            const result = await store.dispatch("cart/removePayWithBonusesAPI")
+            pay_bonuses_loading.value = false
+            if (!result?.is_success) {
+                return errorToast(result?.msg)
+            }
+        }
 
 		// toast 
 		const inputErrorToast = (title: string) => {
@@ -265,6 +273,7 @@ export default defineComponent({
 			addProductQuantity,
 			removeProductQuantity,
             addPayBonuses,
+            removePayBonuses,
 		}
 	}
 });

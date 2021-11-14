@@ -201,6 +201,18 @@ export default {
 		commit('setUserInfo', null)
 		localStorage.removeItem('user_access_token')
 	},
+    async getUserMeAPI(
+        context: ActionContext<any,any>
+    ) {
+		const access_token = localStorage.getItem("user_access_token")
+		if (!access_token) {
+			return null
+		}
+		const resp_data: Record<string,any> = await UserDataService.getUserMe(access_token)
+		if (resp_data.token_valid && resp_data.user_data) {
+			context.commit('setUserInfo', resp_data.user_data)
+        }
+    },
 	async checkUserAuth({commit}: {commit: Commit}) {
 		const access_token = localStorage.getItem("user_access_token")
 //		const test_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMiIsImV4cCI6MTYyOTk3NjA3Nn0.tBJxanC48a1-PbA3GfBrStrUIVFN_mkgLrmDe0vfsz4"
@@ -245,33 +257,33 @@ export default {
 	},
 
 	// validators
-	validateCheckAccount({ state }: Record<string,any>) {
+	validateCheckAccount(context : ActionContext<any,any>) {
 		const v_info = {
 			is_valid: false,
 			v_msg: '',
 		}
-		if (state.user_login_info.user_phone.length != 11) {	
+		if (context.state.user_login_info.user_phone.length != 11) {	
 				v_info.v_msg = 'Корректно введите номер телефона'	
 				return v_info 
 		}
 		v_info.is_valid = true
 		return v_info;
 	},
-	validateCheckPassword({ state }: Record<string,any>) {
+	validateCheckPassword(context: ActionContext<any,any>) {
 		const v_info = {
 			is_valid: false,
 			v_msg: '',
 		}
-		if (state.user_login_info.user_password.length == 0) {	
+		if (context.state.user_login_info.user_password.length == 0) {	
 				v_info.v_msg = 'Введите Ваш пароль'	
 				return v_info 
 		}
 		v_info.is_valid = true
 		return v_info;
 	},
-	validateCheckRegister({state}: Record<string,any>) {
-		const password = state.user_login_info.user_password
-		const password_repeat = state.user_login_info.user_password_repeat
+	validateCheckRegister(context: ActionContext<any,any>) {
+		const password = context.state.user_login_info.user_password
+		const password_repeat = context.state.user_login_info.user_password_repeat
 		const v_info = {
 			is_valid: false,
 			v_msg: '',
@@ -291,29 +303,29 @@ export default {
 		v_info.is_valid = true
 		return v_info
 	},
-	validateCheckRestore({ state }: Record<string,any>) {
+	validateCheckRestore(context: ActionContext<any,any>) {
 		const v_info = {
 			is_valid: false,
 			v_msg: '',
 		}
-		if (state.user_login_info.restore_code.length == 0) {	
+		if (context.state.user_login_info.restore_code.length == 0) {	
 				v_info.v_msg = 'Введите код, высланный Вам по смс'	
 				return v_info 
 		}
 		v_info.is_valid = true
 		return v_info
 	},
-	validateCheckVerify({ state }: Record<string,any>) {
+	validateCheckVerify(context: ActionContext<any,any>) {
 		const v_info = {
 			is_valid: false,
 			v_msg: '',
 		}
-		if (state.user_login_info.verify_code.length == 0) {	
+		if (context.state.user_login_info.verify_code.length == 0) {	
 				v_info.v_msg = 'Введите код, высланный Вам по смс'	
 				return v_info 
 		}
 		v_info.is_valid = true
-		return v_info
+		return 'asdf'
 	},
 
   },

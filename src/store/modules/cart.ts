@@ -232,6 +232,23 @@ const actions = {
 			return {"is_success": false, "msg": response.data.detail}
         }
 	},
+    async removePayWithBonusesAPI(
+		context: ActionContext<any,any>,
+	) {
+		if (!state.cart) {return false}
+		const user_access_token = context.rootState.user.user_access_token
+
+		const response = await CartDataService.removePayWithBonuses(
+            user_access_token,
+            context.state.cart.id, 
+        )
+		if (response && response.status == 200) {
+			context.commit("setCart", response?.data)
+			return {"is_success": true, "msg": ""}
+		} else {
+			return {"is_success": false, "msg": response?.data?.detail}
+        }
+	},
 }
 
 const cart_store = {

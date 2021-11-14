@@ -42,6 +42,16 @@
 			</span>
 		</div>
 		<div 
+			v-if="cart.bonuses_used && cart.pay_with_bonuses"
+			class="flex items-center justify-between mt-2">
+			<span class="text-sm font-base">
+		        Оплачено бонусами	
+			</span>
+			<span class="text-sm font-semibold text-red-500">
+				{{ cart.pay_with_bonuses }}  &#x20bd;	
+			</span>
+		</div>
+		<div 
 			v-if="cart.bonuses_to_apply && cart?.bonuses_to_apply > 0"
 			class="flex items-center justify-between mt-2">
 			<span class="text-sm font-base">

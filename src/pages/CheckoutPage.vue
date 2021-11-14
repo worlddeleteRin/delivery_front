@@ -286,7 +286,9 @@ export default defineComponent({
 			is_order_submitting.value = true
 			const is_created = await store.dispatch('cart/createOrderAPI')
 			if (is_created) { 
+                await store.dispatch('')
 				await store.dispatch('getUserOrdersAPI')
+                await store.dispatch('getUserMeAPI')
 				successToast("Заказ успешно создан!");
 				// load user orders
 				// route user to the profile page

@@ -7,7 +7,7 @@
 	>
 		<router-link 
 			:to="profile_link.link_path"
-			:class="[isRouteActive(profile_link.link_path) ? 'bg-defaultDim text-defaultTextBg font-medium': '', 'px-6 py-2 rounded-full']"	
+			:class="[isRouteActive(profile_link.link_path) ? 'bg-defaultDim text-defaultTextBg font-medium': '', 'px-6 py-2 rounded-full select-none']"	
 		>
 			<span class="">
 				{{ profile_link.link_name }}
