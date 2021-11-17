@@ -10,4 +10,3 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 export default apiClient;
-
