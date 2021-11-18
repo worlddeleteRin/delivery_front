@@ -5,7 +5,7 @@ const apiClient: AxiosInstance = axios.create({
 	baseURL: api_url,
 	headers: {
 		"Content-type": "application/json",
-		"app_token": "some_access_token_is_here",
+		"App-Token": "some_access_token_is_here",
 	},
 });
 
