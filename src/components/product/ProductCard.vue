@@ -11,16 +11,16 @@
 	<!-- image -->
 	<div 
 	@click="goToProductPage"
-	class="w-6/12 md:max-w-[250px] h-full max-h-[230px] relative rounded md:w-full">
+	class="w-6/12 md:max-w-[250px] max-h-[220px] relative rounded md:w-full">
 		<img
 			v-lazy="product?.imgsrc[0]"
-			class="object-contain w-full h-full rounded cursor-pointer"
+			class="object-contain w-full md:h-40 rounded cursor-pointer"
 		/>
 	</div>
 	<!-- eof image -->
 	<!-- details -->
-	<div class="flex flex-col justify-center w-10/12 ml-2 md:w-full">
-
+	<div class="flex flex-col justify-between w-10/12 ml-2 md:w-full h-full">
+        <div>
 		<!-- name -->
 		<div
 		@click="goToProductPage"
@@ -42,6 +42,7 @@
 			</span>
 		</div>
 		<!-- eof description -->
+        </div>
 		<!-- addcart -->
 			<!-- mobile add cart -->
 			<div class="mt-3 md:hidden">
