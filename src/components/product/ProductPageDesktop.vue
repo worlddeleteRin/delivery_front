@@ -16,7 +16,7 @@
 
 <div 
 	v-if="is_mounted"
-	:class="['fixed inset-x-0 w-10/12 max-w-[800px] max-h-[500px] mx-auto bg-white rounded-xl top-1/2 transform -translate-y-1/2 flex flex-row z-50 py-4']"
+	:class="['fixed inset-x-0 w-10/12 max-w-[800px] h-2/3 max-h-[500px] mx-auto bg-white rounded-xl top-1/2 transform -translate-y-1/2 flex flex-row z-50 py-4']"
 >
 	<!-- main product card div -->
 

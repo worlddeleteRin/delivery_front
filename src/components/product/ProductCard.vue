@@ -6,20 +6,20 @@
 -->
 
 <div class="relative z-0 flex flex-1 md:flex-col md:items-center md:max-w-[400px] border-b border-gray-100 pt-2 pb-5
-	md:border-none py-0">
+	md:border-none py-0 md:py-0">
 
 	<!-- image -->
 	<div 
 	@click="goToProductPage"
-	class="w-6/12 md:max-w-[250px] max-h-[220px] relative rounded md:w-full">
+	class="w-6/12 md:max-w-[250px] md:h-[220px] relative rounded md:w-full overflow-hidden">
 		<img
 			v-lazy="product?.imgsrc[0]"
-			class="object-contain w-full md:h-40 rounded cursor-pointer"
+			class="object-contain w-full h-full rounded cursor-pointer overflow-hidden"
 		/>
 	</div>
 	<!-- eof image -->
 	<!-- details -->
-	<div class="flex flex-col justify-between w-10/12 ml-2 md:w-full h-full">
+	<div class="flex flex-col justify-between w-10/12 ml-2 md:w-full md:max-h-max md:min-h-[180px] flex-1">
         <div>
 		<!-- name -->
 		<div
@@ -38,7 +38,7 @@
 		class="mt-1 leading-4 md:leading-5"
 		>
 			<span class="text-[0.8rem] text-[#5c6370] md:text-[0.9rem]">
-				{{ product.description }}
+				{{ product.description }} 
 			</span>
 		</div>
 		<!-- eof description -->
