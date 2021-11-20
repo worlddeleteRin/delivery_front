@@ -7,12 +7,12 @@
 
     <splide-slide
         @click="goSliderLink(slider)"
-        class="flex justify-center text-center rounded-md cursor-pointer"
+        class="text-center rounded-md cursor-pointer"
         v-for="slider in sliders"
         :key="slider?.id"
 	>
 		<img 
-            class="object-contain w-full max-h-80 min-h-[110px] rounded-md"
+            class="object-contain w-full max-h-80 md:min-h-[110px] rounded-md"
             :src="slider.imgsrc"/>
 	</splide-slide>
 

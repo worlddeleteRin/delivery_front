@@ -80,8 +80,6 @@ export default defineComponent({
 						const mb_cat_cont = document.querySelector("#mobile-category-nav")
 						const el = document.querySelector("#mb-cat-nav-" + category_slug)
 						if (el && el instanceof HTMLElement && mb_cat_cont && mb_cat_cont instanceof HTMLElement) {
-							console.log('cat cont is', mb_cat_cont)
-							console.log('el is', el)
 							const to_scroll = el.offsetLeft - mb_cat_cont.offsetLeft
 							//props.mobileCatScrollbar.setScrollLeft(to_scroll)
 							//mb_cat_cont.scrollLeft = to_scroll

@@ -15,17 +15,17 @@
 -->
 
 <div 
-	id="product_id_1"
-	:class="['fixed top-0 left-0 w-full h-full bg-white py-7 px-9 rounded-xl flex flex-col overflow-x-hidden z-50']"
+	:id="product.id"
+	:class="['fixed top-0 left-0 w-full h-full bg-white py-7 px-9 flex flex-col overflow-x-hidden z-50']"
 	:style="[translate_style, translate_animation, overflow_style]"
 >
 	<!-- main product card div -->
 
 	<!-- image -->
-	<div class="max-h-[400px] h-full relative rounded w-full flex">
+	<div class="max-h-[400px] h-full relative w-full flex">
 		<img
 			v-lazy="product?.imgsrc[0]"
-			class="object-contain w-full rounded"
+			class="object-contain w-full"
 		/>
 	</div>
 	<!-- eof image -->
@@ -55,6 +55,15 @@
 					<div>
 					some test content here	
 					</div>
+					<div>
+					some test content here	
+						<div>
+					some test content here	
+							<div>
+					some test content here	
+								<div>
+					some test content here	
+					</div>		</div>			</div>				</div>
 				</div>
 
 			</div>
@@ -63,10 +72,9 @@
 		</div>
 
 		<!-- addcart -->
-		<div class="w-full overflow-hidden mb-7">
+		<div class="w-full overflow-hidden fixed bottom-0 left-0 px-2 py-4 bg-white shadow-lg">
 			<Button
 				@button-click="addCartClick"
-				rounded="full"
 				:size="'large'"
 				:title="'В корзину за '+ product.price + ' &#8381;'"
 				class="block px-5 text-white bg-default"
@@ -218,7 +226,7 @@ export default defineComponent({
 		});
 		onMounted (() => {
 			is_mounted.value = true
-			var stage = document.getElementById('product_id_1')
+			var stage = document.getElementById(props.product.id)
 			productElement = stage
 			// add onScroll event listener to stage
 

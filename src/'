@@ -13,7 +13,7 @@
 	@click="goToProductPage"
 	class="w-6/12 md:max-w-[250px] md:h-[220px] relative rounded md:w-full overflow-hidden">
 		<img
-			v-lazy="product?.imgsrc[0]"
+			:src="product?.imgsrc[0]"
 			class="object-contain w-full h-full rounded cursor-pointer overflow-hidden"
 		/>
 	</div>

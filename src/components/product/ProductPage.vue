@@ -38,7 +38,7 @@ import { useStore } from 'vuex';
 import { createToast } from 'mosha-vue-toastify';
 
 const productPageDesktop = defineAsyncComponent( () => import(/* webpackChunkName: "product-page-desktop" */ '@/components/product/ProductPageDesktop.vue'));
-const productPageMobile = defineAsyncComponent( () => import(/* webpackChunkName: "product-page-mobile" */ '@/components/product/ProductPageMobile2.vue'));
+const productPageMobile = defineAsyncComponent( () => import(/* webpackChunkName: "product-page-mobile" */ '@/components/product/ProductPageMobile.vue'));
 
 import MainLoadingContainer from '@/components/loaders/MainLoadingContainer.vue';
 

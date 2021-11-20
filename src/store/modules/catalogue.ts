@@ -34,18 +34,24 @@ export default {
 	async getCategoriesAPI(
 		context: ActionContext<any,any>
 	) {
-		const response = await CategoriesDataService.getAll()
-		if (response.status == 200 && response.data.categories) {
-			context.commit('setCategories', response.data.categories)
-			return true
-		}
-		return false
+        if (!context.state.categories) {
+            const response = await CategoriesDataService.getAll()
+            if (response.status == 200 && response.data.categories) {
+                context.commit('setCategories', response.data.categories)
+                return true
+            }
+            return false
+        }
 	},
 	// products section
-	async getProductsAPI({commit}: {commit: Commit}) {
+	async getProductsAPI(
+        context: ActionContext<any,any>
+    ) {
 		// get all products	
-		const products: Array<Record<string,any>> = await ProductsDataService.getAll()	
-		commit('setProducts', products)
+        if (!context.state.products) {
+            const products: Array<Record<string,any>> = await ProductsDataService.getAll()	
+            context.commit('setProducts', products)
+        }
 	},
   },
 }

@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import VueLazyLoad  from "vue3-lazyload";
 // import main styles file
 import "./main.css"
 import 'mosha-vue-toastify/dist/style.css'
@@ -19,6 +18,9 @@ import {
 	ElAffix, ElScrollbar, ElButton, ElSlider
 } from 'element-plus';
 import 'element-plus/dist/index.css';
+
+import lazyPlugin from 'vue3-lazy'
+
 
 //import ElementPlus from 'element-plus';
 
@@ -41,10 +43,16 @@ app.component('Icon', Icon)
 app.component('Button', Button)
 
 // add vue observer directive
-
+//
 
 app.use(store)
 app.use(router)
-app.use(VueLazyLoad)
+
+const loading_image = process.env.BASE_URL + "./loading.svg"
+
+
+app.use(lazyPlugin, {
+});
+
 
 app.mount("#app");

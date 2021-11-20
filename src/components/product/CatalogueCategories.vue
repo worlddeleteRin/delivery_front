@@ -2,7 +2,7 @@
 
 	<!-- categories -->
 	<div
-		class="flex overflow-x-scroll pt-2"
+		class="flex overflow-x-scroll pt-2 px-1"
 		id="mobile-category-nav"
 	>
 		<div
@@ -14,13 +14,13 @@
 		>
 			<div 
 			v-if="category.slug == activeCategorySlug"
-			class="bg-defaultDim mx-1 px-4 py-[6px] rounded-full text-defaultTextBg text-sm font-semibold"
+			class="bg-defaultDim mx-1 px-4 py-[6px] rounded-full text-defaultTextBg text-md font-semibold"
 			>
 				{{ category.name }} 
 			</div>
 			<div 
 			v-else
-			class="bg-gray-100 mx-1 px-4 py-[6px] rounded-full text-gray-700 text-sm font-semibold"
+			class="bg-gray-100 mx-1 px-4 py-[6px] rounded-full text-gray-700 text-md font-semibold"
 			>
 				{{ category.name }} 
 			</div>

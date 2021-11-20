@@ -15,23 +15,23 @@
 -->
 
 <div 
-	id="product_id_1"
-	:class="['fixed top-0 left-0 w-full h-full bg-white py-7 px-9 rounded-xl flex flex-col overflow-x-hidden z-50']"
-	:style="[overflow_style]"
+	:id="product.id"
+	:class="['fixed top-0 left-0 w-full h-full bg-white block z-50 overflow-hidden']"
 >
 	<!-- main product card div -->
+    <div class="overflow-scroll border-2 border-black w-full h-full px-9">
 
 	<!-- image -->
-	<div class="max-h-[400px] h-full relative rounded w-full flex">
+	<div class="max-h-[300px] h-full relative rounded w-full flex">
 		<img
-			v-lazy="'https://dodopizza-a.akamaihd.net/static/Img/Products/ebb801139e7d4c4397fcc4372c7dd149_1875x1875.jpeg'"
+			v-lazy="product.imgsrc[0]"
 			class="object-contain w-full rounded"
 		/>
 	</div>
 	<!-- eof image -->
 
 	<!-- detail block -->
-	<div class="relative w-full">
+	<div class="relative w-full mb-20">
 		<div
 			class="relative h-full"
 		>
@@ -48,21 +48,10 @@
 			<!-- product description -->
 			<div class="mt-1">
 				{{ product.description }}
-				<div
-				v-for="item in 15"
-				:key="item"
-				>
-					<div>
-					some test content here	
-					</div>
-				</div>
-
 			</div>
 			<!-- eof product description -->
 
 		</div>
-
-
 	</div>
 	<!-- eof detail block -->
 
@@ -81,18 +70,31 @@
 <!--
 	</div>
 	-->
+    </div>
 	<!-- eof main product card div -->
 
+
 		<!-- addcart -->
-		<div class="fixed bottom-0 left-0 w-full mb-8 overflow-hidden">
+		<div class="w-full overflow-hidden fixed bottom-0 left-0 px-2 py-4 bg-white shadow-lg">
 			<Button
-				rounded="full"
-				:size="'large'"
+				@button-click="addCartClick"
+                size="large"
 				:title="'В корзину за '+ product.price + ' &#8381;'"
 				class="block px-5 text-white bg-default"
 			/>
 		</div>
 		<!-- eof addcart -->
+
+	<div
+	@click="closeProductPage"
+	class="fixed p-1 bg-white rounded-full shadow-lg cursor-pointer left-4 top-3"
+	>
+		<Icon
+			icon="bx:bxs-chevron-down"
+			width="40"
+			class="text-black"
+		/>
+	</div>
 
 </div>
 
@@ -121,47 +123,28 @@ export default defineComponent({
 	props: {
 		product: {
 			type: Object, // change to product interface Object type?
-			default() { 
-				return {
-					"id": "someproductid",
-					"name": "some product name",
-					"description": "some product cool description will be here asdf sadfasdf asdfasdf asdf asdf asdfas dfasdf asdf asdf",
-					"price": 123123,
-					"imgsrc": [
-						"https://i.picsum.photos/id/527/1000/1000.jpg?hmac=58DhmNmoflyEtAQW8CtzqGN1tItgvnytquSC23qjhdQ"
-					],
-				};
-			},
+            default: null
 		},
 	},
-	emits: ['add-cart'],
+	emits: ['add-to-cart'],
 
 	setup (props, { emit }) {	
 		const router = useRouter()
 		// refs
 		const is_mounted = ref(false)
 		const is_closed = ref(false)
-		const overflow_style = ref("overflow-y: scroll;")
-		const backgroud_translate_style = ref("")
 
 		// computed
 
 		// functions
-
-		const makeOverflowYScroll = () => { 
-			overflow_style.value = "overflow-y: scroll;"
-		}
-		const makeOverflowYHidden = () => { 
-			overflow_style.value = "overflow-y: hidden;"
-		}
-		var addCartClick = () => emit('add-cart')
+		var addCartClick = () => emit('add-to-cart')
 		var closeProductPage = () =>  { 
+            document.querySelector("html").style.overflow = "scroll"
 			if (!is_closed.value) {
 				is_closed.value = true
-				// remove hammer event from element
-				makeOverflowYScroll()
 				is_closed.value = true
-				router.go(-1)
+                router.push('/')
+				// router.go(-1)
 				// router.back()
 			}
 		}
@@ -175,20 +158,15 @@ export default defineComponent({
 		});
 		onMounted (() => {
 			is_mounted.value = true
-			const pr = document.querySelector("#product_id_1")
+			// const pr = document.querySelector("#" + props.product.id)
 		});
 
-		const on_mouse_down = (e, f) => {
-			return null
-		}
 
 		return {
 			is_mounted,
 			// functions
 			addCartClick,
 			closeProductPage,
-			overflow_style,
-			backgroud_translate_style,		
 		}
 	}
 });
