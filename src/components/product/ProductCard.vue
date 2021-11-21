@@ -8,6 +8,18 @@
 <div class="relative z-0 flex flex-1 md:flex-col md:items-center md:max-w-[400px] border-b border-gray-100 pt-2 pb-5
 	md:border-none py-0 md:py-0">
 
+    <!-- product card badges left -->
+    <div class="absolute top-2 md:top-8 left-0 z-[2]">
+        <!-- sale badge -->
+        <div 
+            v-if="product?.sale_price && product?.sale_price > 0"
+            class="uppercase text-[12px] md:text-[13px] text-white bg-red-500 rounded-lg px-3">
+            скидка
+        </div>
+        <!-- eof sale badge -->
+    </div>
+    <!-- eof product card badges left -->
+
 	<!-- image -->
 	<div 
 	@click="goToProductPage"

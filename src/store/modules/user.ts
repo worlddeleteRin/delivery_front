@@ -1,16 +1,6 @@
 import { Commit, ActionContext } from 'vuex';
 import { UserDataService } from '@/api/user';
 
-const user_order_status_colors = {
-	"awaiting_confirmation": "black",
-	"awaiting_cooking": "black",
-	"awaiting_payment": "black",
-	"awaiting_shipment": "green",
-	"in_progress": "blue",
-	"incomplete": "black",
-	"completed": "#00c304",
-	"cancelled": "#00c304"
-}
 const user_authorize_states = {
 	NEED_LOGIN: "NEED_LOGIN",
 	NEED_PASSWORD: "NEED_PASSWORD",
@@ -33,15 +23,17 @@ export default {
 	user: null,
 	delivery_addresses: null,
 	user_access_token: null,
-	user_order_status_colors: user_order_status_colors,
 	user_orders: null,
 	user_authorized: false,
 	user_authorize_states: user_authorize_states,
-	user_login_info: user_login_info_default,
+	user_login_info: { ...user_login_info_default },
   },
   getters: {
   },
   mutations: {
+    resetLoginModal(state: Record<string,any>) {
+        state.user_login_info = { ...user_login_info_default }
+    },
 	setUserDeliveryAddresses(state: Record<string,any>, addresses: Array<Record<string,any>>) {
 		state.delivery_addresses = addresses
 	},
@@ -183,17 +175,23 @@ export default {
 		return {"is_registered": false, "msg": resp?.data?.detail}
 	},
 	async registerVerifyUserAPI({commit, state}: {commit: Commit, state: Record<string,any>}) {
+        const resp_info = {
+            success: true,
+            msg: ""
+        }
 		const username = state.user_login_info.user_phone 
 		const password = state.user_login_info.user_password
 		const otp = state.user_login_info.verify_code
-		const resp_data: Record<string,any> = await UserDataService.registerVerify(username, password, otp)
-		if (resp_data) {
-			commit('setUserInfo', resp_data.data.user)
-			commit('setUserAccessToken', resp_data.data.access_token)
-			localStorage.setItem("user_access_token", resp_data.data.access_token)
-			return true
+		const resp: Record<string,any> = await UserDataService.registerVerify(username, password, otp)
+        console.log('resp is', resp)
+		if (resp.status == 200) {
+			commit('setUserInfo', resp?.data?.user)
+			commit('setUserAccessToken', resp?.data?.access_token)
+			localStorage.setItem("user_access_token", resp?.data?.access_token)
+            return resp_info
 		}
-		return false
+		resp_info.success = false
+        resp_info.msg = resp?.data?.detail
 	},
 	async logoutUser({commit}: {commit: Commit}) {
 		commit('setUserAccessToken', null)	
@@ -317,15 +315,15 @@ export default {
 	},
 	validateCheckVerify(context: ActionContext<any,any>) {
 		const v_info = {
-			is_valid: false,
+			is_valid: true,
 			v_msg: '',
 		}
 		if (context.state.user_login_info.verify_code.length == 0) {	
+                v_info.is_valid = false
 				v_info.v_msg = 'Введите код, высланный Вам по смс'	
 				return v_info 
 		}
-		v_info.is_valid = true
-		return 'asdf'
+		return v_info
 	},
 
   },

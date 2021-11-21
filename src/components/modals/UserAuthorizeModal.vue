@@ -178,6 +178,7 @@ export default defineComponent({
 			// close modal and set modal state to NEED_LOGIN
 			emit('close-modal')	
 			user_login_info_local.user_authorize_state = props.userAuthorizeStates.NEED_LOGIN
+            store.commit("resetLoginModal")
 			updateUserLoginInfo()
 		}
 
@@ -268,6 +269,7 @@ export default defineComponent({
 				if (is_authorized) {
 					emit('user-authorized')
 					setLoading(false)
+                    store.commit("resetLoginModal")
 					return successToast('Вы успешно авторизованы!')
 				} else {
 					setLoading(false)
@@ -286,17 +288,17 @@ export default defineComponent({
 				// need to send verify code on server
 				// create account and login user, if code is right
 				// show errorToast, if code is not right
-				const is_verified = await store.dispatch("registerVerifyUserAPI")
-                console.log('is verified is', is_verified)
-				if (is_verified) {
+				const resp = await store.dispatch("registerVerifyUserAPI")
+				if (resp.success) {
 					await store.dispatch("checkUserAuth")
 					router.push(after_authorized_route_to.value)
+                    store.commit("resetLoginModal")
 					emit('close-modal')
 					setLoading(false)
 					return successToast('Аккаунт успешно создан!')
 				} else {
 					setLoading(false)
-					return errorToast('Неверный код')
+					return errorToast(resp.msg)
 				}
 
 			}
@@ -314,6 +316,7 @@ export default defineComponent({
 					await store.dispatch("checkUserAuth")
 					router.push(after_authorized_route_to.value)
 					emit('close-modal')
+                    store.commit("resetLoginModal")
 					setLoading(false)
 					return successToast('Восстановлен доступ! Установите новый пароль в настройках профиля.')
 				} else {

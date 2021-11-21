@@ -16,12 +16,12 @@
 
 <div 
 	v-if="is_mounted"
-	:class="['fixed inset-x-0 w-10/12 max-w-[800px] h-2/3 max-h-[500px] mx-auto bg-white rounded-xl top-1/2 transform -translate-y-1/2 flex flex-row z-50 py-4']"
+	:class="['fixed inset-x-0 w-10/12 max-w-[800px] h-2/3 max-h-[500px] mx-auto bg-white rounded-xl top-1/2 transform -translate-y-1/2 flex flex-row z-50 py-4 px-4']"
 >
 	<!-- main product card div -->
 
 	<!-- image -->
-	<div class="max-h-[400px] h-full relative rounded w-7/12 flex">
+	<div class="max-h-[400px] h-full relative rounded w-7/12 flex pr-4">
 		<img
 			v-lazy="product?.imgsrc[0]"
 			class="object-contain w-full rounded"

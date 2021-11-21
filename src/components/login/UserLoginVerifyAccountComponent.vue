@@ -30,7 +30,7 @@
 	<!-- user code -->
 	<div class="flex flex-col items-center mt-3">
 	<div class="text-center">
-		Код из смс	
+	    Последние 4 цифры номера телефона, который Вам позвонил	
 	</div>
 	<input
 		autocomplete="false"
