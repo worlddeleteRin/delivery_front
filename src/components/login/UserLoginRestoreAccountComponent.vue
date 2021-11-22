@@ -4,7 +4,7 @@
 </div>
 
 <!-- user restore form -->
-<div>
+<div class="flex flex-col items-center">
 
 	<!-- user phone -->
 	<div class="mt-5 text-center">
@@ -31,7 +31,7 @@
 	<!-- user code -->
 	<div class="flex flex-col items-center mt-3">
 	<div class="text-center">
-		Код из смс	
+	    Введите последние 4 цифры номера, который Вам позвонил	
 	</div>
 	<input
 		autocomplete="false"	
@@ -44,7 +44,7 @@
 	<!-- eof user code -->
 	
 	<!-- restore button -->
-	<div class="mt-8">
+	<div class="mt-8 w-full block">
 		<Button
 		:size="'large'"
 		@button-click="loginCheckRestoreClicked"

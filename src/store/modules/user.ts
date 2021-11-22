@@ -192,6 +192,7 @@ export default {
 		}
 		resp_info.success = false
         resp_info.msg = resp?.data?.detail
+        return resp_info
 	},
 	async logoutUser({commit}: {commit: Commit}) {
 		commit('setUserAccessToken', null)	
@@ -307,7 +308,7 @@ export default {
 			v_msg: '',
 		}
 		if (context.state.user_login_info.restore_code.length == 0) {	
-				v_info.v_msg = 'Введите код, высланный Вам по смс'	
+				v_info.v_msg = 'Введите код'	
 				return v_info 
 		}
 		v_info.is_valid = true
@@ -320,7 +321,7 @@ export default {
 		}
 		if (context.state.user_login_info.verify_code.length == 0) {	
                 v_info.is_valid = false
-				v_info.v_msg = 'Введите код, высланный Вам по смс'	
+				v_info.v_msg = 'Введите код'	
 				return v_info 
 		}
 		return v_info

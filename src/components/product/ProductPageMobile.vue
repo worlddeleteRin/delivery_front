@@ -1,7 +1,7 @@
 <template>
 <div 
 	@click="closeProductPage"
-	class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40"
+	class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-[45]"
 	style="">
 </div>
 
@@ -16,10 +16,10 @@
 
 <div 
 	:id="product.id"
-	:class="['fixed top-0 left-0 w-full h-full bg-white block z-50 overflow-hidden']"
+	:class="['fixed bottom-0 left-0 w-full h-[80%] bg-white block z-50 overflow-hidden rounded-3xl']"
 >
 	<!-- main product card div -->
-    <div class="overflow-scroll border-2 border-black w-full h-full px-9">
+    <div class="overflow-scroll w-full h-full px-9 rounded-3xl">
 
 	<!-- image -->
 	<div class="max-h-[300px] h-full relative rounded w-full flex">
@@ -55,21 +55,6 @@
 	</div>
 	<!-- eof detail block -->
 
-
-	<div
-	@click="closeProductPage"
-	class="fixed p-1 cursor-pointer -top-12 -right-12"
-	>
-		<Icon
-			icon="ci:close-big"
-			width="40"
-			class="text-black"
-		/>
-	</div>
-
-<!--
-	</div>
-	-->
     </div>
 	<!-- eof main product card div -->
 
@@ -87,7 +72,7 @@
 
 	<div
 	@click="closeProductPage"
-	class="fixed p-1 bg-white rounded-full shadow-lg cursor-pointer left-4 top-3"
+	class="absolute p-1 bg-white rounded-full shadow-lg cursor-pointer top-2 right-3"
 	>
 		<Icon
 			icon="bx:bxs-chevron-down"

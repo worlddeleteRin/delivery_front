@@ -4,7 +4,7 @@
 </div>
 
 <!-- user verify form -->
-<div>
+<div class="flex flex-col items-center">
 	<!-- user phone -->
 	<div class="mt-5 text-center">
 		Номер телефона
@@ -43,13 +43,13 @@
 	<!-- eof user code -->
 	
 	<!-- verify button -->
-	<div class="mt-8">
+	<div class="mt-8 block w-full">
 		<Button
 		:size="'large'"
 		@button-click="userRegisterVerifyClick"
 		:title="'Создать аккаунт'"
 		rounded="full"
-		class="flex justify-center px-5 py-3 text-white bg-default"
+		class="flex flex-1 w-full justify-center px-5 py-3 text-white bg-default"
 		/>
 	</div>
 	<!-- eof verify button -->

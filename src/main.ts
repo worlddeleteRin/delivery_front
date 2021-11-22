@@ -22,6 +22,7 @@ import 'element-plus/dist/index.css';
 import lazyPlugin from 'vue3-lazy'
 
 
+
 //import ElementPlus from 'element-plus';
 
 const app = createApp(App)
@@ -30,6 +31,8 @@ const app = createApp(App)
 app.config.globalProperties.api_url = api_url
 app.config.globalProperties.static_url = static_url
 
+
+//
 // element plus components
 //app.use(ElementPlus)
 app.use(ElAffix)
