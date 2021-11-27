@@ -93,14 +93,9 @@ export default defineComponent({
 			default: null,
 		}
 	},
-	setup(props, {emit}) {
+	setup() {
 		// ref 
-		const order_status = ref(props.order.status)
-		const order_status_color  = ref(props.userOrderStatusColors[order_status.value])
-
 		return {
-			// computed
-			order_status_color,
 		}
 	}
 });
